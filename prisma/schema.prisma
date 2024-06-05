@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id                    String     @id @default(cuid())
+  email                 String     @unique
+  name                  String?
+  surname               String?
+  phone                 String?
+  password              String
+  salt                  String
+  last_login_ip_address String
+  current_logged_in_at  DateTime   @default(now())
+  last_logged_in_at     DateTime   @default(now())
+  created_at            DateTime   @default(now())
+  is_admin              Boolean    @default(false)
+  is_property_owner     Boolean    @default(false)
+  properties            Property[] @relation("PropertyOwner")
+  bookmarks             Bookmark[]
+  mediaFiles            Media[]    @relation("UserMedia")
+}
+
+model Property {
+  id             String         @id @default(cuid())
+  title          String
+  description    String
+  price          Float
+  address        String
+  city           String
+  district       String
+  bedroom_count  Int
+  bathroom_count Int
+  size           Float
+  fixtures       String
+  status         String         @default("active")
+  property_type  PropertyType[]
+  for_sale       Boolean        @default(true)
+  latitude       Float
+  longitude      Float
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
+  owner_id       String
+  owner          User           @relation("PropertyOwner", fields: [owner_id], references: [id])
+  images         Media[]
+  bookmarks      Bookmark[]
+}
+
+model PropertyType {
+  id         String     @id @default(cuid())
+  name       String
+  properties Property[]
+}
+
+model Media {
+  id          String    @id @default(cuid())
+  name        String
+  path        String
+  property_id String?
+  property    Property? @relation(fields: [property_id], references: [id])
+  user_id     String
+  user        User      @relation("UserMedia", fields: [user_id], references: [id])
+  created_at  DateTime  @default(now())
+}
+
+model Bookmark {
+  id          String   @id @default(cuid())
+  user_id     String
+  property_id String
+  user        User     @relation(fields: [user_id], references: [id])
+  property    Property @relation(fields: [property_id], references: [id])
+  created_at  DateTime @default(now())
+}
+
+model CMSContent {
+  id               String           @id @default(cuid())
+  title            String
+  description      String?
+  status           String // Draft, Published, Archived, etc.
+  created_at       DateTime         @default(now())
+  updated_at       DateTime         @updatedAt
+  metaTitle        String?
+  meta_description String?
+  meta_keywords    String?
+  sections         ContentSection[]
+}
+
+model ContentSection {
+  id             String     @id @default(cuid())
+  title          String
+  body           String
+  order          Int
+  // customFields Json?
+  createdAt      DateTime   @default(now())
+  cms_content    CMSContent @relation(fields: [cms_content_id], references: [id])
+  cms_content_id String
+}
