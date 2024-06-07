@@ -9,12 +9,12 @@ watch(locale, (newLocale) => {
 
 <template>
     <u-popover :popper="{ arrow: true }">
-        <u-button color="gray" size="sm" variant="link">
+        <u-button color="white" size="sm" variant="link">
             <icon class="w-5 h-5" name="ph:globe-simple" />
             <span>{{ locales.find((item) => item.code === locale).name }}</span></u-button
         >
         <template #panel="{ close }">
-            <div class="p-6 grid grid-cols-2 gap-2">
+            <div class="p-6 grid text-gray-600 grid-cols-2 gap-2">
                 <nuxt-link
                     v-for="lang in locales"
                     :key="lang.code"

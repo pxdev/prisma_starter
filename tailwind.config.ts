@@ -13,28 +13,28 @@ module.exports = {
             '6xl': ['3.75rem', { lineHeight: '1' }],
             '7xl': ['4.5rem', { lineHeight: '1' }],
             '8xl': ['6rem', { lineHeight: '1' }],
-            '9xl': ['8rem', { lineHeight: '1' }],
+            '9xl': ['8rem', { lineHeight: '1' }]
         },
         extend: {
             fontFamily: {
-                noto: '"Noto Kufi Arabic" , sans-serif',
+                cairo: '"Cairo" , sans-serif'
             },
             colors: {
                 'theme-color': {
-                    DEFAULT: '#6F10A2',
-                    50: '#FFFFFF',
-                    100: '#FDFAFE',
-                    200: '#DEB0F7',
-                    300: '#BF65F0',
-                    400: '#A11BE8',
-                    500: '#6F10A2',
-                    600: '#590D82',
-                    700: '#420A61',
-                    800: '#2C0641',
-                    900: '#160320',
-                    950: '#0B0210',
-                },
-            },
-        },
-    },
+                    DEFAULT: '#652454',
+                    50: '#F1D9EB',
+                    100: '#E8BFDD',
+                    200: '#D58AC2',
+                    300: '#C355A6',
+                    400: '#9A3780',
+                    500: '#652454',
+                    600: '#4E1C41',
+                    700: '#38142E',
+                    800: '#210C1C',
+                    900: '#0B0409',
+                    950: '#000000'
+                }
+            }
+        }
+    }
 }

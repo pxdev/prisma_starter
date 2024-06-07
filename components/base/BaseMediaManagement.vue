@@ -1,4 +1,5 @@
 <script setup>
+
 const { handleFileInput, files } = useFileStorage()
 const toast = useToast()
 const user = useCookie('user')
@@ -136,11 +137,8 @@ const removeFromSelectedMedia = (index) => {
 </script>
 
 <template>
-    <pre>
-        {{ media }}
-    </pre>
 
-    <section>
+    <section ref="mediaGallery">
         <div class="media-manager">
             <div class="relative rounded-lg border border-dashed bg-gray-50/50 p-4">
                 <div
@@ -167,7 +165,7 @@ const removeFromSelectedMedia = (index) => {
                     <div
                         v-for="(file, index) in selectedFiles"
                         :key="index"
-                        class="relative flex h-28 w-full items-center overflow-hidden rounded-lg border border-gray-100 p-1 shadow-md shadow-gray-200 transition tag group"
+                        class="img-item relative flex h-28 w-full items-center overflow-hidden rounded-lg border border-gray-100 p-1 shadow-md shadow-gray-200 transition tag group"
                     >
                         <div
                             class="absolute top-2 right-2 z-10 -translate-y-full opacity-0 transition-all delay-100 delete-button group-hover:translate-y-0 group-hover:opacity-100"
@@ -241,7 +239,7 @@ const removeFromSelectedMedia = (index) => {
                                     (file) => item.id === file.id,
                                 ),
                             }"
-                            class="relative flex h-28 w-full items-center overflow-hidden rounded-lg border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
+                            class="img-item relative flex h-28 w-full items-center overflow-hidden rounded-lg border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
                         >
                             <div
                                 class="absolute top-2 right-2 z-10 -translate-y-full opacity-0 transition-all delay-100 delete-button group-hover:translate-y-0 group-hover:opacity-100"
@@ -296,6 +294,7 @@ const removeFromSelectedMedia = (index) => {
                     />
                 </div>
             </div>
+
             <div v-if="activeMediaTab === 'upload-file'">
                 <div class="p-8">
                     <div class="rounded border border-dashed p-4">

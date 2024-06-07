@@ -7,15 +7,15 @@ const isDark = computed({
     },
     set() {
         colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-    },
+    }
 })
 </script>
 
 <template>
-    <u-button color="gray" variant="link" size="sm" @click.prevent="isDark = !isDark">
+    <u-button color="white" size="sm" variant="link" @click.prevent="isDark = !isDark">
         <icon
-            class="w-5 h-5"
-            :name="isDark ? 'line-md:sunny-filled-loop-to-moon-filled-loop-transition' : 'line-md:sunny-filled-loop'"
+             :name="isDark ? 'line-md:sunny-filled-loop-to-moon-filled-loop-transition' : 'line-md:sunny-filled-loop'"
+            class="w-5 h-5 text-yellow-500 "
         />
     </u-button>
 </template>

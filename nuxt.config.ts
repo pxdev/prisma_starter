@@ -69,13 +69,13 @@ export default defineNuxtConfig({
     },
 
     fontMetrics: {
-        fonts: ['Noto Kufi Arabic'],
+        fonts: ['Cairo'],
     },
 
     googleFonts: {
         display: 'swap',
         families: {
-            'Noto+Kufi+Arabic': [100, 200, 300, 400],
+            'Cairo': [300, 400, 500, 700, 900],
         },
     },
     build: {

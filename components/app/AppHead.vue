@@ -27,17 +27,17 @@ _email.value = email
 </script>
 
 <template>
-    <header class="sticky inset-x-0 top-0 z-10 ">
-        <u-container class="">
-            <div class="flex justify-between items-center border-b py-4">
-            <div class="flex items-center text-xl font-bold">Prisma</div>
-            <div class="flex items-center gap-2">
-                <div class="flex items-center">
-                    <language-switcher />
-                    <color-theme />
+    <header class="fixed z-30   border-b-white/10 text-white/60 inset-x-0 top-0  ">
+        <u-container>
+            <div class="flex justify-between  items-center py-6 rounded-b-lg">
+                <div class="flex items-center text-2xl font-bold text-white/90">Prisma</div>
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center">
+                        <language-switcher />
+                        <color-theme />
+                    </div>
+                    <profile-menu v-if="_email" :email="_email" :name="_name" />
                 </div>
-                <profile-menu v-if="_email" :email="_email" :name="_name" />
-            </div>
             </div>
         </u-container>
     </header>
