@@ -47,6 +47,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+
+  <loader></loader>
+
     <main>
 
 
