@@ -20,14 +20,14 @@ model User {
   last_logged_in_at     DateTime   @default(now())
   created_at            DateTime   @default(now())
   is_admin              Boolean    @default(false)
-  is_property_owner     Boolean    @default(false)
-  properties            Property[] @relation("PropertyOwner")
+  is_item_owner         Boolean    @default(false)
+  items                 Items[]    @relation("ItemOwner")
   bookmarks             Bookmark[]
   mediaFiles            Media[]    @relation("UserMedia")
 }
 
-model Property {
-  id             String         @id @default(cuid())
+model Items {
+  id             String            @id @default(cuid())
   title          String
   description    String
   price          Float
@@ -37,44 +37,45 @@ model Property {
   bedroom_count  Int
   bathroom_count Int
   size           Float
+  year_built     Int
   fixtures       String
-  status         String         @default("active")
-  property_type  PropertyType[]
-  for_sale       Boolean        @default(true)
+  status         String            @default("active")
+  item_category  ItemsCategories[]
+  for_sale       Boolean           @default(true)
   latitude       Float
   longitude      Float
-  created_at     DateTime       @default(now())
-  updated_at     DateTime       @updatedAt
+  created_at     DateTime          @default(now())
+  updated_at     DateTime          @updatedAt
   owner_id       String
-  owner          User           @relation("PropertyOwner", fields: [owner_id], references: [id])
+  owner          User              @relation("ItemOwner", fields: [owner_id], references: [id])
   images         Media[]
   bookmarks      Bookmark[]
 }
 
-model PropertyType {
-  id         String     @id @default(cuid())
-  name       String
-  properties Property[]
+model ItemsCategories {
+  id    String  @id @default(cuid())
+  name  String
+  items Items[]
 }
 
 model Media {
-  id          String    @id @default(cuid())
-  name        String
-  path        String
-  property_id String?
-  property    Property? @relation(fields: [property_id], references: [id])
-  user_id     String
-  user        User      @relation("UserMedia", fields: [user_id], references: [id])
-  created_at  DateTime  @default(now())
+  id         String   @id @default(cuid())
+  name       String
+  path       String
+  item_id    String?
+  items      Items?   @relation(fields: [item_id], references: [id])
+  user_id    String
+  user       User     @relation("UserMedia", fields: [user_id], references: [id])
+  created_at DateTime @default(now())
 }
 
 model Bookmark {
-  id          String   @id @default(cuid())
-  user_id     String
-  property_id String
-  user        User     @relation(fields: [user_id], references: [id])
-  property    Property @relation(fields: [property_id], references: [id])
-  created_at  DateTime @default(now())
+  id         String   @id @default(cuid())
+  user_id    String
+  item_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  items      Items    @relation(fields: [item_id], references: [id])
+  created_at DateTime @default(now())
 }
 
 model CMSContent {

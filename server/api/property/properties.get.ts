@@ -15,10 +15,10 @@ export default defineEventHandler(async (event) => {
         const search = query.search as string
 
         // Fetch the total count
-        const total = await prisma.property.count()
+        const total = await prisma.items.count()
 
         // Fetch the properties with pagination
-        const module = await prisma.property.findMany({
+        const module = await prisma.items.findMany({
             skip: page ? skip : undefined,
             take: page ? limit : undefined,
             orderBy: {
@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
                         phone: true,
                     },
                 },
-                property_type: true,
+                item_category: true,
                 images: true,
             },
         })

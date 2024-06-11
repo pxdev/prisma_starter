@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
                 user_id: user_id,
             },
             include: {
-                property: {
+                items: {
                     select: {
                         id: true,
                         title: true,
@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
         // Calculate total pages
         const totalPages = Math.ceil(total / limit)
 
-        // Return the properties and pagination details as JSON response
+        // Return the items and pagination details as JSON response
         return {
             statusCode: 200,
             statusMessage: `Successfully fetched ${moduleName} data`,

@@ -8,7 +8,7 @@ export const useSmoothScroll = () => {
         orientation: 'vertical',
         gestureOrientation: 'vertical',
         smoothWheel: true,
-      })
+       })
 
     gsap.ticker.add((time) => {
         scrollLenis.raf(time * 1000)

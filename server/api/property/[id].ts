@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         }
 
         // Fetch the data by ID
-        const property = await prisma.property.findUnique({
+        const property = await prisma.items.findUnique({
             where: { id },
             include: {
                 owner: {
@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
                         phone: true,
                     },
                 },
-                property_type: true,
+                item_category: true,
                 images: true,
             },
         })

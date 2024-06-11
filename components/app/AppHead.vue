@@ -8,8 +8,8 @@ const me = async () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            token: token,
-        }),
+            token: token
+        })
     })
         .then((data) => {
             return data
@@ -20,17 +20,34 @@ const me = async () => {
 }
 
 const {
-    user: { name, surname, email },
+    user: { name, surname, email }
 } = await me()
+
 _name.value = `${name} ${surname}`
 _email.value = email
+
+const pageY = ref(0)
+
+onMounted(() => {
+    window.addEventListener('scroll', () => {
+        pageY.value = window.scrollY
+    })
+})
+
+
+const isFixedHeader = computed(() => {
+    return pageY.value > 250
+})
+
+
 </script>
 
 <template>
-    <header class="fixed z-30   border-b-white/10 text-white/60 inset-x-0 top-0  ">
-        <u-container>
+
+    <header class="fixed z-30 text-white inset-x-0 top-0 transition duration-700" :class="{'bg-primary-950': isFixedHeader}" >
+         <u-container>
             <div class="flex justify-between  items-center py-6 rounded-b-lg">
-                <div class="flex items-center text-2xl font-bold text-white/90">Prisma</div>
+                <div class="flex items-center text-2xl font-bold">Prisma</div>
                 <div class="flex items-center gap-2">
                     <div class="flex items-center">
                         <language-switcher />

@@ -3,6 +3,7 @@ import pkg from './package.json'
 
 export default defineNuxtConfig({
     devtools: { enabled: false },
+
     typescript: {
         strict: false,
     },
@@ -31,6 +32,7 @@ export default defineNuxtConfig({
         '@nuxtjs/google-fonts',
         '@nuxtjs/i18n',
         'nuxt-file-storage',
+        'nuxt-swiper'
     ],
     fileStorage: {
         mount: 'public/uploads',

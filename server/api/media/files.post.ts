@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     try {
         assertMethod(event, 'POST')
 
-        const { files, property_id, user_id } = await readBody(event)
+        const { files, item_id, user_id } = await readBody(event)
 
         if (!files || !user_id) {
             const err = createError({
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
                 data: {
                     name: fileName,
                     path: `/${user_id}/${fileName}`,
-                    property_id: property_id,
+                    item_id: item_id,
                     user_id: user_id,
                 },
             })

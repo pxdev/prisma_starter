@@ -3,7 +3,7 @@ export default defineAppConfig({
         name: 'Prisma',
     },
     ui: {
-        primary: 'theme-color',
+        primary: 'themeColor',
         gray: 'neutral',
         container: {
           constrained: 'max-w-[90%]',
@@ -18,7 +18,9 @@ export default defineAppConfig({
                 background: 'bg-gray-900/70',
             },
         },
-
+        button: {
+            rounded: 'rounded-none',
+        },
         formGroup: {
             base: 'font-noto',
             error: 'text-xs text-red-500 dark:text-red-400',
@@ -38,6 +40,7 @@ export default defineAppConfig({
             },
         },
         select: {
+            rounded: 'rounded-none',
             color: {
                 white: {
                     outline: 'shadow-none ring-gray-300/80 dark:ring-gray-700/60',
@@ -51,7 +54,6 @@ export default defineAppConfig({
                 },
             },
         },
-        selectMenu: {},
         table: {
             base: 'min-w-full table-fixed',
             divide: 'divide-y divide-gray-100 dark:divide-gray-800',
