@@ -1,5 +1,4 @@
 <script setup>
-
 const { handleFileInput, files } = useFileStorage()
 const toast = useToast()
 const user = useCookie('user')
@@ -137,12 +136,11 @@ const removeFromSelectedMedia = (index) => {
 </script>
 
 <template>
-
     <section ref="mediaGallery">
         <div class="media-manager">
-            <div class="relative  border border-dashed bg-gray-50/50 p-4">
+            <div class="relative border border-dashed bg-gray-50/50 p-4">
                 <div
-                    class="mb-2  border flex flex-col lg:flex-row gap-2 items-center justify-between border-dashed p-2 media-toolbar"
+                    class="mb-2 border flex flex-col lg:flex-row gap-2 items-center justify-between border-dashed p-2 media-toolbar"
                 >
                     <u-button-group>
                         <u-button color="gray" icon="i-solar-album-linear" @click="browseMedia"
@@ -161,11 +159,11 @@ const removeFromSelectedMedia = (index) => {
                         >{{ $t('Selected') }}
                     </p>
                 </div>
-                <div v-if="selectedFiles.length > 0" class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6">
+                <div v-if="selectedFiles.length > 0" class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-8">
                     <div
                         v-for="(file, index) in selectedFiles"
                         :key="index"
-                        class="img-item relative flex h-28 w-full items-center overflow-hidden  border border-gray-100 p-1 shadow-md shadow-gray-200 transition tag group"
+                        class="img-item relative flex h-28 w-full items-center overflow-hidden border border-gray-100 p-1 shadow-md shadow-gray-200 transition tag group"
                     >
                         <div
                             class="absolute top-2 right-2 z-10 -translate-y-full opacity-0 transition-all delay-100 delete-button group-hover:translate-y-0 group-hover:opacity-100"
@@ -191,7 +189,7 @@ const removeFromSelectedMedia = (index) => {
                     </div>
                 </div>
                 <div v-else>
-                    <div class="text-center  my-10 bg-gray-50 dark:bg-gray-900 p-10">
+                    <div class="text-center my-10 bg-gray-50 dark:bg-gray-900 p-10">
                         <icon class="w-6 h-6" name="solar:card-search-line-duotone" />
                         <h3 class="font-semibold mb-1">
                             {{ $t('Select Images to display') }}
@@ -239,7 +237,7 @@ const removeFromSelectedMedia = (index) => {
                                     (file) => item.id === file.id,
                                 ),
                             }"
-                            class="img-item relative flex h-28 w-full items-center overflow-hidden  border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
+                            class="img-item relative flex h-28 w-full items-center overflow-hidden border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
                         >
                             <div
                                 class="absolute top-2 right-2 z-10 -translate-y-full opacity-0 transition-all delay-100 delete-button group-hover:translate-y-0 group-hover:opacity-100"
@@ -265,7 +263,7 @@ const removeFromSelectedMedia = (index) => {
                         </div>
                     </div>
                     <div v-else>
-                        <div class="text-center  my-10 bg-gray-50 dark:bg-gray-900 p-10">
+                        <div class="text-center my-10 bg-gray-50 dark:bg-gray-900 p-10">
                             <icon class="w-6 h-6" name="solar:card-search-line-duotone" />
                             <h3 class="font-semibold mb-1">
                                 {{ $t('No media found') }}
@@ -348,7 +346,7 @@ const removeFromSelectedMedia = (index) => {
                             <div
                                 v-for="(file, fileIndex) in files"
                                 :key="fileIndex + '_file'"
-                                class="relative flex h-28 w-full items-center overflow-hidden  border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
+                                class="relative flex h-28 w-full items-center overflow-hidden border border-gray-100 p-1 shadow-md shadow-gray-200 transition group"
                             >
                                 <div
                                     class="absolute top-2 right-2 z-10 -translate-y-full opacity-0 transition-all delay-100 delete-button group-hover:translate-y-0 group-hover:opacity-100"
@@ -365,7 +363,7 @@ const removeFromSelectedMedia = (index) => {
                                 <img
                                     :src="file.content"
                                     alt=""
-                                    class="block h-full w-full  object-cover object-center transition-all duration-300 group-hover:-rotate-3 group-hover:scale-125"
+                                    class="block h-full w-full object-cover object-center transition-all duration-300 group-hover:-rotate-3 group-hover:scale-125"
                                 />
                             </div>
                         </div>

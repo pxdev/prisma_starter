@@ -1,57 +1,73 @@
 <script setup>
+const form = ref({
+    city: '',
+    district: '',
+    category: '',
+})
+const forTypes = ref([
+    {
+        label: 'Sale',
+        value: 'sale',
+    },
+    {
+        label: 'Rent',
+        value: 'rent',
+    },
+])
+
 const categories = ref([
     {
         label: 'Apartment',
-        value: 'apartment'
+        value: 'apartment',
     },
     {
         label: 'Villa',
-        value: 'villa'
+        value: 'villa',
     },
     {
         label: 'Townhouse',
-        value: 'townhouse'
+        value: 'townhouse',
     },
     {
         label: 'Penthouse',
-        value: 'penthouse'
+        value: 'penthouse',
     },
     {
         label: 'Office',
-        value: 'office'
+        value: 'office',
     },
     {
         label: 'Shop',
-        value: 'shop'
+        value: 'shop',
     },
     {
         label: 'Warehouse',
-        value: 'warehouse'
+        value: 'warehouse',
     },
     {
         label: 'Land',
-        value: 'land'
-    }
+        value: 'land',
+    },
 ])
 const cities = ref([
     {
         label: 'Dubai',
-        value: 'dubai'
+        value: 'dubai',
     },
     {
         label: 'Abu Dhabi',
-        value: 'abu-dhabi'
+        value: 'abu-dhabi',
     },
     {
         label: 'Sharjah',
-        value: 'sharjah'
+        value: 'sharjah',
     },
     {
         label: 'Ajman',
-        value: 'ajman'
-    }
+        value: 'ajman',
+    },
 ])
-
+const forType = ref('sale')
 const city = ref('')
 const district = ref('')
 const category = ref('')
@@ -60,43 +76,58 @@ const category = ref('')
 <template>
     <div>
         <div class="relative p-10 z-10">
-
-            <div class="property-for bg-primary-100 mb-10 w-60  p-1 ">
+            <div class="property-for bg-primary-50/60 mb-10 w-60 p-1">
                 <ul class="grid grid-cols-2">
-                    <li class="text-center"><a class="block p-1.5 bg-white text-primary-500 font-medium  "
-                                               href="#">{{ $t('Sale') }}</a></li>
-                    <li class="text-center"><a class="block p-1.5  " href="#">{{ $t('Rent') }}</a></li>
+                    <li v-for="item in forTypes" class="text-center">
+                        <a
+                            :class="{ 'bg-white text-primary-800 font-medium': forType === item.value }"
+                            class="block text-sm text-gray-400 p-1.5"
+                            href="#"
+                            @click.prevent="forType = item.value"
+                            >{{ $t(item.label) }}</a
+                        >
+                    </li>
                 </ul>
             </div>
 
-
             <div>
-                <u-form class="flex gap-4 items-end mb-4 ">
-                    <u-form-group class="flex-1  min-w-[200px]" label="City">
-                        <u-select-menu v-model="city" :options="cities" placeholder="Select City" searchable
-                                       size="xl" />
+                <u-form :state="form" class="flex gap-4 items-end mb-4">
+                    <u-form-group class="flex-1" label="City">
+                        <u-select-menu
+                            v-model="form.city"
+                            :options="cities"
+                            placeholder="Select City"
+                            searchable
+                            size="xl"
+                        />
                     </u-form-group>
-                    <u-form-group class="flex-1   min-w-[260px]" label="District">
-                        <u-select-menu v-model="district" :options="cities" placeholder="Select District" searchable
-                                       size="xl" />
+                    <u-form-group class="flex-1" label="District">
+                        <u-select-menu
+                            v-model="form.district"
+                            :options="cities"
+                            placeholder="Select District"
+                            searchable
+                            size="xl"
+                        />
                     </u-form-group>
-                    <u-form-group class="flex-1  min-w-[200px]" label="Property type">
-                        <u-select-menu v-model="category" :options="categories" placeholder="All Types" searchable
-                                       size="xl" />
+                    <u-form-group class="flex-1" label="Property type">
+                        <u-select-menu
+                            v-model="form.category"
+                            :options="categories"
+                            placeholder="All Types"
+                            searchable
+                            size="xl"
+                        />
                     </u-form-group>
-                    <u-form-group>
+                    <u-form-group class="flex">
                         <u-button block class="w-32" color="primary" size="xl">Search</u-button>
                     </u-form-group>
-
                 </u-form>
 
-                <u-button color="rose" variant="underline">Advanced Search</u-button>
-
+                <u-button trailing-icon="i-heroicons-arrow-long-right" variant="link">Advanced Search</u-button>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

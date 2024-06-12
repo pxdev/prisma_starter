@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         '@nuxtjs/google-fonts',
         '@nuxtjs/i18n',
         'nuxt-file-storage',
-        'nuxt-swiper'
+        'nuxt-swiper',
     ],
     fileStorage: {
         mount: 'public/uploads',
@@ -77,7 +77,7 @@ export default defineNuxtConfig({
     googleFonts: {
         display: 'swap',
         families: {
-            'Cairo': [300, 400, 500, 700, 900],
+            Cairo: [300, 400, 500, 700, 900],
         },
     },
     build: {

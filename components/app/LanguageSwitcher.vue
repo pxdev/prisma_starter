@@ -14,17 +14,13 @@ watch(locale, (newLocale) => {
             <span>{{ locales.find((item) => item.code === locale).name }}</span></u-button
         >
         <template #panel="{ close }">
-            <div class="p-6 grid text-gray-600 grid-cols-2 gap-2">
+            <div class="text-gray-600 p-1 gap-2">
                 <nuxt-link
                     v-for="lang in locales"
                     :key="lang.code"
-                    :class="[
-                        locale === lang.code
-                            ? 'border-primary-500 dark:border-primary-500 bg-primary-500/10 text-primary-500'
-                            : '',
-                    ]"
+                    :class="[locale === lang.code ? 'bg-primary-50/50 font-semibold' : '']"
                     :to="switchLocalePath(lang.code)"
-                    class="relative hover:bg-primary-500/5 col-span-1 min-w-[150px] flex border dark:border-gray-700 rounded gap-2 px-4 py-2 text-sm items-center"
+                    class="relative hover:bg-primary-500/5 min-w-[150px] flex rounded gap-2 px-4 py-2 text-sm items-center"
                     @click="close"
                 >
                     <icon :name="lang.flag" class="w-6 h-6" />

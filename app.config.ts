@@ -6,7 +6,7 @@ export default defineAppConfig({
         primary: 'themeColor',
         gray: 'neutral',
         container: {
-          constrained: 'max-w-[90%]',
+            constrained: 'max-w-[90%]',
         },
         slideover: {
             overlay: {

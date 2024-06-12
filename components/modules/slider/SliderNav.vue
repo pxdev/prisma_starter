@@ -7,32 +7,43 @@ const props = defineProps({
     current: {
         type: Number,
         default: 1,
-        required: true
+        required: true,
     },
     count: {
         type: Number,
-        required: true
-    }
+        required: true,
+    },
 })
 </script>
 
 <template>
     <!-- Slider navigation container -->
-    <div class="slider-nav bottom-0 p-6 absolute right-[5%] z-50 flex  items-center" dir="ltr">
-
+    <div class="slider-nav bottom-0 p-6 absolute right-[5%] z-50 flex items-center" dir="ltr">
         <!-- Previous button -->
         <div class="swiper-circle cursor-pointer swiper-prev group" @click="swiper.slidePrev()">
             <div
-                class="container-inner w-[65px] h-[45px] relative flex justify-center items-center after:h-[0.5px] after:bg-white after:w-[45px] after:absolute after:transition-all after:left-8 group-hover:after:left-6 group-hover:after:w-[25px] ">
+                class="container-inner w-[65px] h-[45px] relative flex justify-center items-center after:h-[0.5px] after:bg-white after:w-[45px] after:absolute after:transition-all after:left-8 group-hover:after:left-6 group-hover:after:w-[25px]"
+            >
                 <!-- Left arrow icon -->
-                <icon class="w-8 h-8 group-hover:-translate-x-1/3 transition text-white"
-                      name="ri:arrow-drop-left-fill" />
+                <icon
+                    class="w-8 h-8 group-hover:-translate-x-1/3 transition text-white"
+                    name="ri:arrow-drop-left-fill"
+                />
                 <!-- Circle SVG for animation -->
                 <svg class="circle h-[45px] w-[45px] absolute" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <g class="circle-wrap" fill="none" stroke-linejoin="round" stroke-miterlimit="10"
-                       stroke-width="0.5">
-                        <circle class="stroke-white/60 transition-all duration-500 ease-in-out" cx="12" cy="12"
-                                r="10.5" />
+                    <g
+                        class="circle-wrap"
+                        fill="none"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        stroke-width="0.5"
+                    >
+                        <circle
+                            class="stroke-white/60 transition-all duration-500 ease-in-out"
+                            cx="12"
+                            cy="12"
+                            r="10.5"
+                        />
                     </g>
                 </svg>
             </div>
@@ -48,16 +59,28 @@ const props = defineProps({
         <!-- Next button -->
         <div class="swiper-circle cursor-pointer swiper-next group" @click="swiper.slideNext()">
             <div
-                class="container-inner w-[65px] h-[45px] relative flex justify-center items-center after:h-[0.5px] after:bg-white after:w-[45px] after:absolute after:transition-all after:right-8 group-hover:after:right-6 group-hover:after:w-[25px] ">
+                class="container-inner w-[65px] h-[45px] relative flex justify-center items-center after:h-[0.5px] after:bg-white after:w-[45px] after:absolute after:transition-all after:right-8 group-hover:after:right-6 group-hover:after:w-[25px]"
+            >
                 <!-- Right arrow icon -->
-                <icon class="w-8 h-8 group-hover:translate-x-1/3 transition text-white"
-                      name="ri:arrow-drop-right-fill" />
+                <icon
+                    class="w-8 h-8 group-hover:translate-x-1/3 transition text-white"
+                    name="ri:arrow-drop-right-fill"
+                />
                 <!-- Circle SVG for animation -->
                 <svg class="circle h-[45px] w-[45px] absolute" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <g class="circle-wrap" fill="none" stroke-linejoin="round" stroke-miterlimit="10"
-                       stroke-width="0.5">
-                        <circle class="stroke-white/60 transition-all duration-500 ease-in-out" cx="12" cy="12"
-                                r="10.5" />
+                    <g
+                        class="circle-wrap"
+                        fill="none"
+                        stroke-linejoin="round"
+                        stroke-miterlimit="10"
+                        stroke-width="0.5"
+                    >
+                        <circle
+                            class="stroke-white/60 transition-all duration-500 ease-in-out"
+                            cx="12"
+                            cy="12"
+                            r="10.5"
+                        />
                     </g>
                 </svg>
             </div>

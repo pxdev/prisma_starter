@@ -1,4 +1,6 @@
 <script setup>
+const localePath = useLocalePath()
+
 const _name = ref(null)
 const _email = ref(null)
 const token = useCookie('token').value || ''
@@ -8,8 +10,8 @@ const me = async () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            token: token
-        })
+            token: token,
+        }),
     })
         .then((data) => {
             return data
@@ -20,13 +22,14 @@ const me = async () => {
 }
 
 const {
-    user: { name, surname, email }
+    user: { name, surname, email },
 } = await me()
 
 _name.value = `${name} ${surname}`
 _email.value = email
 
 const pageY = ref(0)
+const mobileMenuOpen = ref(false)
 
 onMounted(() => {
     window.addEventListener('scroll', () => {
@@ -34,31 +37,105 @@ onMounted(() => {
     })
 })
 
+onUnmounted(() => {
+    window.removeEventListener('scroll', () => {
+        pageY.value = window.scrollY
+    })
+})
 
 const isFixedHeader = computed(() => {
     return pageY.value > 250
 })
 
-
+const navLinks = [
+    {
+        id: 1,
+        name: 'Properties',
+        to: '/properties',
+    },
+    {
+        id: 3,
+        name: 'Join Us',
+        to: '/auth/register',
+    },
+    {
+        id: 4,
+        name: 'Contact Us',
+        to: '/contact',
+    },
+]
 </script>
 
 <template>
-
-    <header class="fixed z-30 text-white inset-x-0 top-0 transition duration-700" :class="{'bg-primary-950': isFixedHeader}" >
-         <u-container>
-            <div class="flex justify-between  items-center py-6 rounded-b-lg">
-                <div class="flex items-center text-2xl font-bold">Prisma</div>
-                <div class="flex items-center gap-2">
-                    <div class="flex items-center">
-                        <language-switcher />
-                        <color-theme />
+    <u-slideover v-model="mobileMenuOpen">
+        <div class="h-screen flex flex-col bg-primary-950 text-white">
+            <div class="flex items-center justify-between p-6 z-100">
+                <base-logo class="w-24" />
+                <u-button color="black" variant="soft" @click="mobileMenuOpen = false">
+                    <span class="sr-only">Close menu</span>
+                    <icon aria-hidden="true" class="text-white w-8 h-8" name="ri-close-line" />
+                </u-button>
+            </div>
+            <div class="flex-1 p-6 h-full overflow-y-auto">
+                <div class="divide-y">
+                    <div class="space-y-2 py-6 flex flex-col">
+                        <a
+                            v-for="nav in navLinks"
+                            :key="nav.id"
+                            :href="localePath(nav.to)"
+                            class="p-2 rounded"
+                            target="_self"
+                            @click="mobileMenuOpen = false"
+                            >{{ $t(nav.name) }}</a
+                        >
                     </div>
-                    <profile-menu v-if="_email" :email="_email" :name="_name" />
                 </div>
+            </div>
+            <div class="flex p-6 bg-primary-900/20 justify-between items-center">
+                <profile-menu v-if="_email" :email="_email" :name="_name" />
+                <div class="flex">
+                    <language-switcher />
+                    <color-theme />
+                </div>
+            </div>
+        </div>
+    </u-slideover>
+
+    <header
+        :class="{ 'bg-primary-950/95 backdrop-blur': isFixedHeader }"
+        class="fixed z-30 text-white inset-x-0 top-0 transition duration-700"
+    >
+        <u-container class="mx-auto flex py-4 items-center justify-between">
+            <div class="flex">
+                <base-logo class="w-[120px]" />
+            </div>
+            <div class="hidden lg:flex gap-2 mx-auto text-[16px]">
+                <a
+                    v-for="nav in navLinks"
+                    :key="nav.id"
+                    :href="localePath(nav.to)"
+                    class="group transition ease-in-out relative overflow-hidden py-2 mx-6 after:absolute after:transition-all after:right-0 after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full hover:after:left-0"
+                    target="_self"
+                    >{{ $t(nav.name) }}</a
+                >
+            </div>
+
+            <div class="flex lg:hidden">
+                <u-button color="white" variant="link" @click="mobileMenuOpen = true">
+                    <span class="sr-only">Open</span>
+                    <icon class="h-6 w-6" name="ri-menu-line" />
+                </u-button>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-6">
+                <div class="flex items-center">
+                    <language-switcher />
+                    <color-theme />
+                </div>
+                <profile-menu v-if="_email" :email="_email" :name="_name" class="hidden lg:flex" />
             </div>
         </u-container>
     </header>
-    <!-- << app header >> -->
 </template>
 
 <style scoped></style>

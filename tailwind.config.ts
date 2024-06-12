@@ -13,14 +13,14 @@ module.exports = {
             '6xl': ['3.75rem', { lineHeight: '1' }],
             '7xl': ['4.5rem', { lineHeight: '1' }],
             '8xl': ['6rem', { lineHeight: '1' }],
-            '9xl': ['8rem', { lineHeight: '1' }]
+            '9xl': ['8rem', { lineHeight: '1' }],
         },
         extend: {
             fontFamily: {
-                cairo: '"Cairo" , sans-serif'
+                cairo: '"Cairo" , sans-serif',
             },
             colors: {
-                'themeColor': {
+                themeColor: {
                     DEFAULT: '#829698',
                     50: '#E7EBEB',
                     100: '#DBE1E2',
@@ -32,9 +32,9 @@ module.exports = {
                     700: '#4D5C5D',
                     800: '#333D3E',
                     900: '#1A1F20',
-                    950: '#0D1010'
-                }
-            }
-        }
-    }
+                    950: '#0D1010',
+                },
+            },
+        },
+    },
 }
