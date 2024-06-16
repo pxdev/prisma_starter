@@ -1,6 +1,8 @@
 <script setup>
 
 
+import PropertyCard from "~/components/modules/properties/PropertyCard.vue";
+
 const moduleName = ref({
   singular: 'Property',
   plural: 'Properties',
@@ -11,6 +13,15 @@ const route = useRoute()
 const toast = useToast()
 const localePath = useLocalePath()
 
+const breadCrumbs = ref([
+  {
+    label: 'Home',
+    to: localePath('/')
+  },
+  {
+    label: 'Properties',
+  }
+])
 
 // Filters
 const search = ref('')
@@ -21,9 +32,7 @@ const pageCount = ref(10)
 // Fetch Data
 const {
   data: module,
-  pending,
   error,
-  refresh: refreshRecords,
 } = await useAsyncData('properties', () => $fetch('/api/property/properties', {
       method: 'GET',
       params: {
@@ -46,10 +55,22 @@ useHead({
 </script>
 
 <template>
-  <pre>
-    {{ route.params }}
-  </pre>
+  <loader />
 
-  <pre>{{module}}</pre>
+  <pages-header title="Properties" :bread-crumbs="breadCrumbs" />
+
+  <main class="bg-white py-20">
+    <u-container>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <property-card :property="property" v-for="property in module.data?.module" :key="property.id" />
+      </div>
+
+
+
+
+    </u-container>
+  </main>
+
 
 </template>

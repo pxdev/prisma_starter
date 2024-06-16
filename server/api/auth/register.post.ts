@@ -2,10 +2,10 @@ import { prisma } from '~~/db'
 import bcrypt from 'bcrypt'
 
 export default defineEventHandler(async (event) => {
-    const { name, surname, email, phone, password, is_property_owner } = await readBody(event)
+    const { name, surname, email, phone, password, is_item_owner } = await readBody(event)
 
     // Check if all fields are present
-    if (!name || !surname || !email || !phone || !password || is_property_owner === undefined) {
+    if (!name || !surname || !email || !phone || !password || is_item_owner === undefined) {
         prisma.$disconnect()
 
         return {
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
                 email: email,
                 phone: phone,
                 password: hash,
-                is_property_owner: is_property_owner,
+                is_item_owner: is_item_owner,
                 salt: salt,
                 last_login_ip_address: '',
                 last_logged_in_at: new Date(),

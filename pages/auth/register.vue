@@ -59,7 +59,7 @@ const form = ref({
     email: undefined,
     phone: undefined,
     password: undefined,
-    is_property_owner: false,
+    is_item_owner: false,
 })
 
 const schema = z.object({
@@ -136,9 +136,9 @@ const onError = async (event) => {
                             <u-form-group
                                 :label="$t('Property Owner')"
                                 class="flex items-center justify-between gap-2"
-                                name="is_property_owner"
+                                name="is_item_owner"
                             >
-                                <u-toggle v-model="form.is_property_owner" />
+                                <u-toggle v-model="form.is_item_owner" />
                             </u-form-group>
                         </div>
                         <!--Submit-->
