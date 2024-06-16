@@ -1,7 +1,7 @@
 import { prisma } from '~~/db'
 import { defineEventHandler, createError, sendError } from 'h3'
 
-const moduleName = 'Property'
+const moduleName = 'Pages'
 
 export default defineEventHandler(async (event) => {
     try {
@@ -18,21 +18,12 @@ export default defineEventHandler(async (event) => {
         }
 
         // Fetch the data by ID
-        const item = await prisma.items.findUnique({
-            where: { id },
-            include: {
-                owner: {
-                    select: {
-                        id: true,
-                        name: true,
-                        surname: true,
-                        email: true,
-                        phone: true,
-                    },
-                },
-                item_category: true,
-                images: true,
-            },
+        const item = await prisma.pages.findUnique({
+            where: { slug:id },
+            include:{
+                page_sections: true
+
+            }
         })
 
         if (!item) {

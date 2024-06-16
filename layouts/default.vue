@@ -7,7 +7,7 @@ onMounted(() => {
 </script>
 <template>
     <Html :dir="localeProperties.dir" :lang="head.htmlAttrs.lang" class="h-full font-cairo">
-        <Body>
+        <Body class="bg-primary-950">
             <div class="content">
                 <app-head />
                 <slot />

@@ -13,6 +13,10 @@ export default defineEventHandler(async (event) => {
         const limit = parseInt(query.limit as string) || 10
         const skip = (page - 1) * limit
         const search = query.search as string
+         const type = query.type as string
+        const city = query.city as string
+        const district = query.district as string
+        const for_sale = query.for_sale as Boolean
 
         // Fetch the total count
         const total = await prisma.items.count()
@@ -25,10 +29,24 @@ export default defineEventHandler(async (event) => {
                 created_at: 'asc',
             },
             where: {
-                title: {
+                status: 'active',
+                city: {
+                    contains: city,
+                },
+                district:{
+                    contains: district,
+                },
+                 title: {
                     contains: search,
                 },
-            },
+                  item_category: {
+                        some: {
+                            name: {
+                                contains: type,
+                            },
+                        }
+                    },
+              },
             include: {
                 owner: {
                     select: {
@@ -40,7 +58,12 @@ export default defineEventHandler(async (event) => {
                     },
                 },
                 item_category: true,
-                images: true,
+                images: {
+                    select: {
+                        id: true,
+                        path: true,
+                    }
+                },
             },
         })
 

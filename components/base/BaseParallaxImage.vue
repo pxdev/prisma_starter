@@ -38,6 +38,8 @@ onMounted(() => {
             scale: 1.1,
             duration: 1,
         })
+
+
     }, parallax.value)
 })
 

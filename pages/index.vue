@@ -31,6 +31,9 @@ onMounted(() => {
 onUnmounted(() => {
     ctx.revert()
 })
+
+const searchParams = ref({})
+
 </script>
 
 <template>
@@ -40,7 +43,7 @@ onUnmounted(() => {
         <section ref="mainBanner" class="panel overflow-hidden relative bg-gray-950 h-screen w-full">
             <home-slider class="absolute h-full" />
         </section>
-        <section class="panel w-full">
+        <section class="panel w-full bg-white">
             <u-container>
                 <div class="py-24 grid gap-6 items-center lg:grid-cols-2">
                     <base-parallax-image class="w-full h-[450px]" src="/images/cozy-modern-loft-b.webp" />

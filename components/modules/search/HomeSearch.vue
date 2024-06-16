@@ -1,9 +1,13 @@
 <script setup>
+const router = useRouter()
+const localePath = useLocalePath()
 const form = ref({
-    city: '',
-    district: '',
-    category: '',
+    propertyFor: 'sale',
+    city: undefined,
+    district: undefined,
+    category: undefined,
 })
+
 const forTypes = ref([
     {
         label: 'Sale',
@@ -14,7 +18,6 @@ const forTypes = ref([
         value: 'rent',
     },
 ])
-
 const categories = ref([
     {
         label: 'Apartment',
@@ -67,23 +70,32 @@ const cities = ref([
         value: 'ajman',
     },
 ])
-const forType = ref('sale')
-const city = ref('')
-const district = ref('')
-const category = ref('')
-</script>
+
+const search = () => {
+  router.push({
+    path: localePath('/properties'),
+    query: {
+      city: form.value.city,
+      district: form.value.district,
+      category: form.value.category,
+      propertyFor: form.value.propertyFor
+    }
+  })
+}
+
+ </script>
 
 <template>
     <div>
-        <div class="relative p-10 z-10">
+         <div class="relative p-10 z-10">
             <div class="property-for bg-primary-50/60 mb-10 w-60 p-1">
                 <ul class="grid grid-cols-2">
                     <li v-for="item in forTypes" class="text-center">
                         <a
-                            :class="{ 'bg-white text-primary-800 font-medium': forType === item.value }"
+                            :class="{ 'bg-white text-primary-800 font-medium': form.propertyFor === item.value }"
                             class="block text-sm text-gray-400 p-1.5"
                             href="#"
-                            @click.prevent="forType = item.value"
+                            @click.prevent="form.propertyFor = item.value"
                             >{{ $t(item.label) }}</a
                         >
                     </li>
@@ -97,6 +109,7 @@ const category = ref('')
                             v-model="form.city"
                             :options="cities"
                             placeholder="Select City"
+                            value-attribute="label"
                             searchable
                             size="xl"
                         />
@@ -106,6 +119,7 @@ const category = ref('')
                             v-model="form.district"
                             :options="cities"
                             placeholder="Select District"
+                            value-attribute="label"
                             searchable
                             size="xl"
                         />
@@ -114,13 +128,14 @@ const category = ref('')
                         <u-select-menu
                             v-model="form.category"
                             :options="categories"
+                            value-attribute="label"
                             placeholder="All Types"
                             searchable
                             size="xl"
                         />
                     </u-form-group>
                     <u-form-group class="flex">
-                        <u-button block class="w-32" color="primary" size="xl">Search</u-button>
+                        <u-button @click.prevent="search" block class="w-32" color="primary" size="xl">Search</u-button>
                     </u-form-group>
                 </u-form>
 

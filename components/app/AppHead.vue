@@ -44,7 +44,7 @@ onUnmounted(() => {
 })
 
 const isFixedHeader = computed(() => {
-    return pageY.value > 250
+    return pageY.value > 100
 })
 
 const navLinks = [
@@ -54,12 +54,12 @@ const navLinks = [
         to: '/properties',
     },
     {
-        id: 3,
+        id: 2,
         name: 'Join Us',
         to: '/auth/register',
     },
     {
-        id: 4,
+        id: 3,
         name: 'Contact Us',
         to: '/contact',
     },
@@ -93,7 +93,9 @@ const navLinks = [
             </div>
             <div class="flex p-6 bg-primary-900/20 justify-between items-center">
                 <profile-menu v-if="_email" :email="_email" :name="_name" />
-                <div class="flex">
+              <u-button v-else :to="localePath('/auth/login')" >{{$t('Login')}}</u-button>
+
+              <div class="flex">
                     <language-switcher />
                     <color-theme />
                 </div>
@@ -109,16 +111,16 @@ const navLinks = [
             <div class="flex">
                 <base-logo class="w-[120px]" />
             </div>
-            <div class="hidden lg:flex gap-2 mx-auto text-[16px]">
+            <nav class="hidden lg:flex gap-2 mx-auto text-[16px]">
                 <a
                     v-for="nav in navLinks"
                     :key="nav.id"
                     :href="localePath(nav.to)"
-                    class="group transition ease-in-out relative overflow-hidden py-2 mx-6 after:absolute after:transition-all after:right-0 after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full hover:after:left-0"
+                    class="group transition ease-in-out relative overflow-hidden py-2 mx-3 after:absolute after:transition-all after:right-0 after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full hover:after:left-0"
                     target="_self"
                     >{{ $t(nav.name) }}</a
                 >
-            </div>
+            </nav>
 
             <div class="flex lg:hidden">
                 <u-button color="white" variant="link" @click="mobileMenuOpen = true">
@@ -133,6 +135,7 @@ const navLinks = [
                     <color-theme />
                 </div>
                 <profile-menu v-if="_email" :email="_email" :name="_name" class="hidden lg:flex" />
+                <u-button v-else :to="localePath('/auth/login')" >{{$t('Login')}}</u-button>
             </div>
         </u-container>
     </header>
