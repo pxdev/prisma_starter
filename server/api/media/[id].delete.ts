@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
         console.error(error)
         const err = createError({
             statusCode: 500,
-            statusMessage: `Error Deleted ${moduleName} data`,
+            statusMessage: `Error Deleting ${moduleName} data`,
             data: error,
         })
         sendError(event, err)

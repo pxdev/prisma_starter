@@ -1,5 +1,12 @@
-<script setup></script>
+<script setup>
 
-<template>xxxxxxxx</template>
+</script>
+
+<template>
+  <pages-header title="Contact Us" />
+
+  
+
+</template>
 
 <style scoped></style>

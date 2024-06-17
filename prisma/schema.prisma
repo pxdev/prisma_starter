@@ -35,7 +35,7 @@ model User {
   items                 Item[]     @relation("ItemOwner")
   bookmarks             Bookmark[]
   media_files           Media[]    @relation("UserMedia")
-  custom_data           Json // Stores dynamic custom fields
+  custom_data           Json? // Stores dynamic custom fields
 }
 
 model Item {
@@ -63,7 +63,7 @@ model Item {
   owner          User           @relation("ItemOwner", fields: [owner_id], references: [id])
   images         Media[]
   bookmarks      Bookmark[]
-  custom_data    Json // Stores dynamic custom fields
+  custom_data    Json? // Stores dynamic custom fields
 }
 
 enum ItemStatus {
@@ -123,7 +123,7 @@ model Page {
   meta_description String?
   meta_keywords    String?
   page_sections    PageSectionOnPage[]
-  custom_data      Json // Stores dynamic custom fields
+  custom_data      Json? // Stores dynamic custom fields
 }
 
 model Banner {
@@ -132,9 +132,9 @@ model Banner {
   status      BannerStatus // Draft, Published, Archived, etc.
   created_at  DateTime     @default(now())
   updated_at  DateTime     @updatedAt
-  custom_data Json // Stores dynamic custom fields
   media_id    String?
   media       Media?       @relation(fields: [media_id], references: [id])
+  custom_data Json? // Stores dynamic custom fields
 }
 
 model PageSection {
@@ -144,10 +144,10 @@ model PageSection {
   body           String?
   display_order  Int
   preview_image  String?
-  custom_data    Json // Stores dynamic custom fields
   created_at     DateTime            @default(now())
   updated_at     DateTime            @updatedAt
   pages          PageSectionOnPage[]
+  custom_data    Json? // Stores dynamic custom fields
 }
 
 model PageSectionOnPage {
@@ -156,9 +156,9 @@ model PageSectionOnPage {
   page        Page        @relation(fields: [page_id], references: [id])
   section_id  String
   section     PageSection @relation(fields: [section_id], references: [id])
-  custom_data Json // Stores dynamic custom fields
   created_at  DateTime    @default(now())
   updated_at  DateTime    @updatedAt
+  custom_data Json? // Stores dynamic custom fields
 }
 
 model Contact {
@@ -199,8 +199,8 @@ model Setting {
   currency_symbol           String   @default("$")
   timezone                  String   @default("UTC")
   allow_agent_registration  Boolean  @default(true)
-  custom_data               Json // Stores dynamic custom fields
   updated_at                DateTime @updatedAt
+  custom_data               Json? // Stores dynamic custom fields
 }
 
 model City {

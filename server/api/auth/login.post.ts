@@ -1,6 +1,7 @@
 import { createJwtToken } from '~~/jwt'
 import { prisma } from '~~/db'
 import bcrypt from 'bcrypt'
+const moduleName = 'User'
 
 export default defineEventHandler(async (event) => {
     const { email, password } = await readBody(event)
@@ -49,14 +50,18 @@ export default defineEventHandler(async (event) => {
 
             //Add token and success attributes to the object
             updateUser.token = token
-            updateUser.success = true
 
-            return updateUser
+            return {
+                statusCode: 200,
+                success: true,
+                statusMessage: `Successfully logged in`,
+                data: updateUser,
+            }
         } else {
             return {
                 statusCode: 500,
-                message: `The user with email "${email}" does not exist or the password does not match`,
                 success: false,
+                statusMessage: `The user with email "${email}" does not exist or the password does not match`,
             }
         }
     } else {
@@ -64,7 +69,8 @@ export default defineEventHandler(async (event) => {
         prisma.$disconnect()
 
         return {
-            message: `The user with email ${email} does not exist or the password does not match`,
+            statusCode: 500,
+            statusMessage: `The user with email ${email} does not exist or the password does not match`,
             success: false,
         }
     }

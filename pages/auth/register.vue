@@ -13,44 +13,6 @@ const localePath = useLocalePath()
 
 const isSubmitting = ref(false)
 
-const handleSubmit = async () => {
-    await useFetch('/api/auth/register', {
-        method: 'POST',
-        body: JSON.stringify(form.value),
-
-        onResponse(context) {
-            const responseOk = context.response._data.success
-            const responseMessage = context.response._data.message
-
-            if (responseOk) {
-                toast.add({
-                    title: t('Account Created'),
-                    description: t('Your account has been created successfully'),
-                    icon: 'i-heroicons-check-circle-solid',
-                    color: 'teal',
-                })
-            } else {
-                toast.add({
-                    title: t('Error'),
-                    description: t(responseMessage),
-                    icon: 'i-heroicons-exclamation-triangle-16-solid',
-                    color: 'red',
-                })
-
-                // formRef.value(context.response._data.errors)
-            }
-        },
-        onRequestError() {
-            toast.add({
-                title: t('Error'),
-                description: t('An error occurred'),
-                icon: 'i-heroicons-exclamation-triangle-16-solid',
-                color: 'red',
-            })
-        },
-    })
-}
-
 const formRef = ref(null)
 
 const form = ref({
@@ -64,27 +26,56 @@ const form = ref({
 
 const schema = z.object({
     name: z.string({
-        required_error: t('Required Field'),
+      required_error: t('validation.requiredError'),
     }),
 
     email: z
         .string({
-            required_error: t('Required Field'),
+          required_error: t('validation.requiredError'),
         })
         .email(),
 
     password: z.string({
-        required_error: t('Required Field'),
+      required_error: t('validation.requiredError'),
     }),
 
     phone: z.string({
-        required_error: t('Required Field'),
+      required_error: t('validation.requiredError'),
     }),
 
     surname: z.string({
-        required_error: t('Required Field'),
+      required_error: t('validation.requiredError'),
     }),
 })
+
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  await useAsyncData('login', () => $fetch(`/api/auth/register`, {
+    method: 'POST',
+    body: JSON.stringify(form.value),
+    onResponse(context) {
+      const  response = context.response._data
+      if (response.success) {
+        toast.add({
+          title: 'Success',
+          description: response.statusMessage,
+          color: 'teal',
+        })
+
+        navigateTo(localePath('/auth/login'))
+
+      }else {
+        toast.add({
+          title: 'Error',
+          description: response.statusMessage,
+          color: 'red',
+        })
+      }
+      isSubmitting.value = false
+
+    }
+  }))
+}
 
 const onError = async (event) => {
     const element = document.getElementById(event.errors[0].id)
@@ -103,8 +94,7 @@ const onError = async (event) => {
                         $t('Home')
                     }}</nuxt-link>
                     <div class="flex items-center gap-2">
-                        <language-switcher />
-                        <color-theme />
+                         <color-theme />
                     </div>
                 </div>
 
@@ -118,23 +108,23 @@ const onError = async (event) => {
 
                     <u-form ref="formRef" :schema="schema" :state="form" @error="onError" @submit="handleSubmit">
                         <div class="gap-4 space-y-4">
-                            <u-form-group :label="$t('Name')" name="name" required>
+                            <u-form-group :label="$t('auth.name')" name="name" required>
                                 <u-input v-model="form.name" size="lg" />
                             </u-form-group>
-                            <u-form-group :label="$t('Surname')" name="surname" required>
+                            <u-form-group :label="$t('auth.surname')" name="surname" required>
                                 <u-input v-model="form.surname" size="lg" />
                             </u-form-group>
-                            <u-form-group :label="$t('Email')" name="email" required>
+                            <u-form-group :label="$t('auth.email')"  name="email" required>
                                 <u-input v-model="form.email" size="lg" />
                             </u-form-group>
-                            <u-form-group :label="$t('Password')" name="password" required>
+                            <u-form-group name="password" :label="$t('auth.password')" required>
                                 <u-input v-model="form.password" size="lg" type="password" />
                             </u-form-group>
-                            <u-form-group :label="$t('Phone')" name="phone" required>
+                            <u-form-group  name="phone" :label="$t('auth.phone')" required>
                                 <u-input v-model="form.phone" size="lg" />
                             </u-form-group>
                             <u-form-group
-                                :label="$t('Property Owner')"
+                                :label="$t('auth.propertyOwner')"
                                 class="flex items-center justify-between gap-2"
                                 name="is_item_owner"
                             >
@@ -144,11 +134,11 @@ const onError = async (event) => {
                         <!--Submit-->
                         <div class="block mt-6 w-full">
                             <u-button :loading="isSubmitting" block size="lg" type="submit">{{
-                                $t('Register')
+                                $t('auth.register')
                             }}</u-button>
                             <u-button :to="localePath('/auth/login')" block size="lg" variant="link">
-                                {{ $t('Already have an account ?') }}
-                            </u-button>
+                              {{ $t('auth.haveAnAccount') }}
+                             </u-button>
                         </div>
                     </u-form>
                 </div>

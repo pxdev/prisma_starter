@@ -9,7 +9,8 @@ export default defineEventHandler(async (event) => {
         prisma.$disconnect()
 
         return {
-            message: 'All fields are required',
+            statusMessage: 'All fields are required',
+            statusCode: 500,
             success: false,
         }
     }
@@ -26,7 +27,8 @@ export default defineEventHandler(async (event) => {
         prisma.$disconnect()
 
         return {
-            message: `The user with email "${email}" already exists`,
+            statusCode: 500,
+            statusMessage: `The user with email "${email}" already exists`,
             success: false,
         }
     } else {
@@ -62,6 +64,9 @@ export default defineEventHandler(async (event) => {
         createUser.success = true
 
         return {
+            success: true,
+             statusMessage: `Successfully registered`,
+            statusCode: 200,
             data: createUser,
         }
     }

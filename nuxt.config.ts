@@ -12,6 +12,15 @@ export default defineNuxtConfig({
             version: pkg.version,
             JWT_TOKEN_SECRET: process.env.JWT_TOKEN_SECRET,
         },
+        mailerUser: '',
+        mailerPass: '',
+        mailerLog: '',
+        mailerDriver: '',
+        mailerHost: '',
+        mailerPort: '',
+        mailerSmtpTls: '',
+        mailerFromAddress: '',
+        mailerToAddress: '',
     },
 
     components: [
@@ -33,6 +42,7 @@ export default defineNuxtConfig({
         '@nuxtjs/i18n',
         'nuxt-file-storage',
         'nuxt-swiper',
+        'nuxt-mailer'
     ],
     fileStorage: {
         mount: 'public/uploads',
@@ -49,15 +59,7 @@ export default defineNuxtConfig({
                 dir: 'ltr',
                 name: 'English',
                 file: 'en.js',
-            },
-            {
-                code: 'ar',
-                flag: 'flag:sa-4x3',
-                iso: 'ar-SA',
-                dir: 'rtl',
-                name: 'Arabic',
-                file: 'ar.js',
-            },
+            }
         ],
     },
 

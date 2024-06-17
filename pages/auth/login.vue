@@ -20,6 +20,7 @@ const onError = async (event) => {
 
 const localePath = useLocalePath()
 
+
 const form = ref({
     email: 'drpxdev@gmail.com',
     password: 'p123321',
@@ -28,50 +29,38 @@ const form = ref({
 const schema = z.object({
     email: z
         .string({
-            required_error: t('Required Field'),
+            required_error: t('validation.requiredError'),
         })
         .email(),
 })
 
 const handleSubmit = async () => {
-    await useFetch('/api/auth/login', {
-        method: 'POST',
-        body: JSON.stringify(form.value),
+  isSubmitting.value = true
+  await useAsyncData('login', () => $fetch(`/api/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify(form.value),
+    onResponse(context) {
+      const  response = context.response._data
+       if (response.success) {
+         toast.add({
+           title: 'Success',
+           description: response.statusMessage,
+           color: 'teal',
+         })
 
-        onResponse(context) {
-            const responseOk = context.response._data.success
-            const responseMessage = context.response._data.message
+         navigateTo(localePath('/'))
 
-            if (responseOk) {
-                toast.add({
-                    title: t('Login Success'),
-                    description: t('You have successfully logged in!'),
-                    icon: 'i-heroicons-check-circle-solid',
-                    color: 'teal',
-                })
+       }else {
+        toast.add({
+          title: 'Error',
+          description: response.statusMessage,
+          color: 'red',
+        })
+        }
+      isSubmitting.value = false
 
-                navigateTo(localePath('/auth/account'))
-            } else {
-                toast.add({
-                    title: t('Error'),
-                    description: t(responseMessage),
-                    icon: 'i-heroicons-exclamation-triangle-16-solid',
-                    color: 'red',
-                })
-                navigateTo(localePath('/auth/login'))
-            }
-        },
-        onRequestError() {
-            toast.add({
-                title: t('Error'),
-                description: t('An error occurred'),
-                icon: 'i-heroicons-exclamation-triangle-16-solid',
-                color: 'red',
-            })
-
-            navigateTo(localePath('/auth/login'))
-        },
-    })
+    }
+  }))
 }
 </script>
 
@@ -86,17 +75,16 @@ const handleSubmit = async () => {
                         $t('Home')
                     }}</nuxt-link>
                     <div class="flex items-center gap-2">
-                        <language-switcher />
-                        <color-theme />
+                         <color-theme />
                     </div>
                 </div>
 
                 <div class="w-full login">
                     <heading is="h2">
-                        {{ $t('Welcome back!') }}
+                        {{ $t('auth.welcomeBack') }}
                     </heading>
                     <p class="mb-6 text-xs text-gray-400">
-                        {{ $t('Sign in to your account to continue.') }}
+                        {{ $t('auth.signInToYourAccount') }}
                     </p>
 
                     <u-alert
@@ -110,10 +98,10 @@ const handleSubmit = async () => {
 
                     <u-form :schema="schema" :state="form" class="login-form" @error="onError" @submit="handleSubmit">
                         <div class="space-y-4">
-                            <u-form-group label="Email" name="email">
+                            <u-form-group :label="$t('auth.email')" name="email">
                                 <u-input v-model="form.email" size="lg" />
                             </u-form-group>
-                            <u-form-group label="Password" name="password">
+                            <u-form-group :label="$t('auth.password')"  name="password">
                                 <u-input v-model="form.password" size="lg" type="password" />
                             </u-form-group>
                         </div>
@@ -121,10 +109,10 @@ const handleSubmit = async () => {
                         <!--Submit-->
                         <div class="mt-6">
                             <u-button :loading="isSubmitting" block size="lg" @click="handleSubmit">{{
-                                $t('Login')
+                                $t('auth.login')
                             }}</u-button>
                             <u-button block size="lg" variant="link" :to="localePath('/auth/register')">
-                                {{ $t('Create an account') }}
+                                {{ $t('auth.createAccount') }}
                             </u-button>
                         </div>
                     </u-form>
