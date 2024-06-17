@@ -3,8 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum BannerStatus {
+  ACTIVE
+  INACTIVE
 }
 
 model User {
@@ -21,13 +32,14 @@ model User {
   created_at            DateTime   @default(now())
   is_admin              Boolean    @default(false)
   is_item_owner         Boolean    @default(false)
-  items                 Items[]    @relation("ItemOwner")
+  items                 Item[]     @relation("ItemOwner")
   bookmarks             Bookmark[]
   media_files           Media[]    @relation("UserMedia")
+  custom_data           Json // Stores dynamic custom fields
 }
 
-model Items {
-  id             String            @id @default(cuid())
+model Item {
+  id             String         @id @default(cuid())
   title          String
   description    String
   price          Float
@@ -39,23 +51,31 @@ model Items {
   size           Float
   year_built     Int
   fixtures       String
-  status         String            @default("active")
-  item_category  ItemsCategories[]
-  for_sale       Boolean           @default(true)
+  status         ItemStatus     @default(ACTIVE)
+  item_category  ItemCategory[]
+  for_sale       Boolean        @default(true)
+  is_featured    Boolean        @default(false)
   latitude       Float
   longitude      Float
-  created_at     DateTime          @default(now())
-  updated_at     DateTime          @updatedAt
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
   owner_id       String
-  owner          User              @relation("ItemOwner", fields: [owner_id], references: [id])
+  owner          User           @relation("ItemOwner", fields: [owner_id], references: [id])
   images         Media[]
   bookmarks      Bookmark[]
+  custom_data    Json // Stores dynamic custom fields
 }
 
-model ItemsCategories {
-  id    String  @id @default(cuid())
+enum ItemStatus {
+  ACTIVE
+  INACTIVE
+  SOLD
+}
+
+model ItemCategory {
+  id    String @id @default(cuid())
   name  String
-  items Items[]
+  items Item[]
 }
 
 model Media {
@@ -63,10 +83,11 @@ model Media {
   name       String
   path       String
   item_id    String?
-  items      Items?   @relation(fields: [item_id], references: [id])
+  item       Item?    @relation(fields: [item_id], references: [id])
   user_id    String
   user       User     @relation("UserMedia", fields: [user_id], references: [id])
   created_at DateTime @default(now())
+  banner     Banner[]
 }
 
 model Bookmark {
@@ -74,7 +95,7 @@ model Bookmark {
   user_id    String
   item_id    String
   user       User     @relation(fields: [user_id], references: [id])
-  items      Items    @relation(fields: [item_id], references: [id])
+  item       Item     @relation(fields: [item_id], references: [id])
   created_at DateTime @default(now())
 }
 
@@ -90,31 +111,54 @@ model Menu {
   updated_at DateTime @updatedAt
 }
 
-model Pages {
-  id               String         @id @default(cuid())
+model Page {
+  id               String              @id @default(cuid())
   title            String
-  slug             String         @unique
+  slug             String              @unique
   description      String?
-  status           String // Draft, Published, Archived, etc.
-  created_at       DateTime       @default(now())
-  updated_at       DateTime       @updatedAt
+  status           PageStatus // Draft, Published, Archived, etc.
+  created_at       DateTime            @default(now())
+  updated_at       DateTime            @updatedAt
   meta_title       String?
   meta_description String?
   meta_keywords    String?
-  page_sections    PageSections[] @relation("PageSections")
+  page_sections    PageSectionOnPage[]
+  custom_data      Json // Stores dynamic custom fields
 }
 
-model PageSections {
-  id             String   @id @default(cuid())
+model Banner {
+  id          String       @id @default(cuid())
+  title       String
+  status      BannerStatus // Draft, Published, Archived, etc.
+  created_at  DateTime     @default(now())
+  updated_at  DateTime     @updatedAt
+  custom_data Json // Stores dynamic custom fields
+  media_id    String?
+  media       Media?       @relation(fields: [media_id], references: [id])
+}
+
+model PageSection {
+  id             String              @id @default(cuid())
   title          String
-  component_name String   @default("DefaultComponent")
-  body           String
+  component_name String              @default("DefaultComponent")
+  body           String?
   display_order  Int
   preview_image  String?
-  custom_fields  String?
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-  pages          Pages[]  @relation("PageSections")
+  custom_data    Json // Stores dynamic custom fields
+  created_at     DateTime            @default(now())
+  updated_at     DateTime            @updatedAt
+  pages          PageSectionOnPage[]
+}
+
+model PageSectionOnPage {
+  id          String      @id @default(cuid())
+  page_id     String
+  page        Page        @relation(fields: [page_id], references: [id])
+  section_id  String
+  section     PageSection @relation(fields: [section_id], references: [id])
+  custom_data Json // Stores dynamic custom fields
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
 }
 
 model Contact {
@@ -126,7 +170,7 @@ model Contact {
   created_at DateTime @default(now())
 }
 
-model Settings {
+model Setting {
   id                        String   @id @default(cuid())
   business_name             String
   business_logo             String
@@ -155,18 +199,19 @@ model Settings {
   currency_symbol           String   @default("$")
   timezone                  String   @default("UTC")
   allow_agent_registration  Boolean  @default(true)
+  custom_data               Json // Stores dynamic custom fields
   updated_at                DateTime @updatedAt
 }
 
-model Cities {
-  id        String      @id @default(cuid())
+model City {
+  id        String     @id @default(cuid())
   name      String
-  districts Districts[]
+  districts District[]
 }
 
-model Districts {
+model District {
   id      String @id @default(cuid())
   name    String
   city_id String
-  city    Cities @relation(fields: [city_id], references: [id])
+  city    City   @relation(fields: [city_id], references: [id])
 }

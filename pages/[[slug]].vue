@@ -8,7 +8,7 @@ const pageSlug = route.params.slug
 const {
   data: module,
   error,
-} = await useAsyncData(pageSlug, () => $fetch(`/api/pages/${pageSlug}`, {
+} = await useAsyncData(pageSlug, () => $fetch(`/api/page/${pageSlug}`, {
   method: 'GET',
 }))
 

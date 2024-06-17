@@ -12,15 +12,15 @@ export default defineEventHandler(async (event) => {
         const search = query.search as string
 
         // Fetch the total count
-        const total = await prisma.items.count()
+        const total = await prisma.page.count()
 
         // Fetch the items based on the query parameters
-        const module = await prisma.items.findMany({
+        const module = await prisma.page.findMany({
              orderBy: {
                 created_at: 'asc',
             },
             where: {
-                status: 'active',
+                status: 'PUBLISHED',
                 title: {
                     contains: search,
                 },
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
 
         })
 
-        // Calculate total pages
+        // Calculate total page
 
         // Return the data and pagination details as JSON response
         return {

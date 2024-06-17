@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         }
 
         // Fetch the data by ID
-        const item = await prisma.items.findUnique({
+        const item = await prisma.item.findUnique({
             where: { id },
             include: {
                 owner: {

@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         }
 
         // Fetch the data by ID
-        const item = await prisma.pages.findUnique({
+        const item = await prisma.page.findUnique({
             where: { slug:id },
             include:{
                 page_sections: true

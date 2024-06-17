@@ -10,6 +10,8 @@ let ctx
 const files = ref([])
 
 onMounted(() => {
+
+ 
     ctx = gsap.context((self) => {
         const bannerSlider = self.selector('.banner-slider')
 
@@ -30,14 +32,17 @@ onMounted(() => {
 
 onUnmounted(() => {
     ctx.revert()
-})
+
+ })
 
 const searchParams = ref({})
 
 </script>
 
 <template>
-    <loader />
+  <base-scroll>
+
+  <loader />
 
     <main>
         <section ref="mainBanner" class="panel overflow-hidden relative bg-gray-950 h-screen w-full">
@@ -57,6 +62,7 @@ const searchParams = ref({})
             </u-container>
         </section>
     </main>
+  </base-scroll>
 </template>
 
 <style lang="css"></style>

@@ -44,7 +44,7 @@ onUnmounted(() => {
 })
 
 const isFixedHeader = computed(() => {
-    return pageY.value > 100
+    return pageY.value > 75
 })
 
 const navLinks = [
@@ -96,8 +96,7 @@ const navLinks = [
               <u-button v-else :to="localePath('/auth/login')" >{{$t('Login')}}</u-button>
 
               <div class="flex">
-                    <language-switcher />
-                    <color-theme />
+                     <color-theme />
                 </div>
             </div>
         </div>
@@ -111,17 +110,15 @@ const navLinks = [
             <div class="flex">
                 <base-logo class="w-[120px]" />
             </div>
-            <nav class="hidden lg:flex gap-2 mx-auto text-[16px]">
-                <a
-                    v-for="nav in navLinks"
-                    :key="nav.id"
-                    :href="localePath(nav.to)"
-                    class="group transition ease-in-out relative overflow-hidden py-2 mx-3 after:absolute after:transition-all after:right-0 after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full hover:after:left-0"
-                    target="_self"
-                    >{{ $t(nav.name) }}</a
-                >
-            </nav>
-
+          <nav class="hidden lg:flex gap-2 mx-auto text-[16px]">
+            <a
+                v-for="nav in navLinks"
+                :key="nav.id"
+                :href="localePath(nav.to)"
+                class="group transition ease-in-out relative overflow-hidden py-2 mx-3 after:absolute after:transition-all after:right-1/2 after:left-1/2 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full hover:after:left-0 hover:after:right-0"
+                target="_self"
+            >{{ $t(nav.name) }}</a>
+          </nav>
             <div class="flex lg:hidden">
                 <u-button color="white" variant="link" @click="mobileMenuOpen = true">
                     <span class="sr-only">Open</span>
@@ -131,8 +128,7 @@ const navLinks = [
 
             <div class="hidden lg:flex items-center gap-6">
                 <div class="flex items-center">
-                    <language-switcher />
-                    <color-theme />
+                     <color-theme />
                 </div>
                 <profile-menu v-if="_email" :email="_email" :name="_name" class="hidden lg:flex" />
                 <u-button v-else :to="localePath('/auth/login')" >{{$t('Login')}}</u-button>

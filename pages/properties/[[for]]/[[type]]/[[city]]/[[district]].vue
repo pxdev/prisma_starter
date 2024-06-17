@@ -1,8 +1,4 @@
 <script setup>
-
-
-import PropertyCard from "~/components/modules/properties/PropertyCard.vue";
-
 const moduleName = ref({
   singular: 'Property',
   plural: 'Properties',
@@ -55,11 +51,13 @@ useHead({
 </script>
 
 <template>
+  <base-scroll>
+
   <loader />
 
   <pages-header title="Properties" :bread-crumbs="breadCrumbs" />
 
-  <main class="bg-white py-20">
+  <main class="bg-gray-100 py-20">
     <u-container>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -71,6 +69,6 @@ useHead({
 
     </u-container>
   </main>
-
+</base-scroll>
 
 </template>

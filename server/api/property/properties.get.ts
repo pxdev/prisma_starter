@@ -19,17 +19,17 @@ export default defineEventHandler(async (event) => {
         const for_sale = query.for_sale as Boolean
 
         // Fetch the total count
-        const total = await prisma.items.count()
+        const total = await prisma.item.count()
 
         // Fetch the properties with pagination
-        const module = await prisma.items.findMany({
+        const module = await prisma.item.findMany({
             skip: page ? skip : undefined,
             take: page ? limit : undefined,
             orderBy: {
                 created_at: 'asc',
             },
             where: {
-                status: 'active',
+                status: 'ACTIVE',
                 city: {
                     contains: city,
                 },
@@ -67,7 +67,7 @@ export default defineEventHandler(async (event) => {
             },
         })
 
-        // Calculate total pages
+        // Calculate total page
         const totalPages = Math.ceil(total / limit)
 
         // Return the data and pagination details as JSON response

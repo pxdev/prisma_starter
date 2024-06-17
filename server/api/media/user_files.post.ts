@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
             },
         })
 
-        // Calculate total pages
+        // Calculate total page
         const totalPages = Math.ceil(total / limit)
 
         // Return the items and pagination details as JSON response
