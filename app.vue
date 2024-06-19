@@ -1,26 +1,27 @@
 <script setup>
-const { appConfig } = useAppConfig()
-const nuxtApp = useNuxtApp()
+const { appConfig } = useAppConfig();
+const nuxtApp = useNuxtApp();
 nuxtApp.hook("page:finish", () => {
-  window.scrollTo(0, 0)
-})
+  window.scrollTo(0, 0);
+});
 
 useHead({
-
-    title: appConfig.name,
-    titleTemplate: `%s - ${appConfig.name}`,
-    meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
-    ],
-})
- 
+  title: appConfig.name,
+  titleTemplate: `%s - ${appConfig.name}`,
+  meta: [
+    {
+      name: "viewport",
+      content: "width=device-width, initial-scale=1, maximum-scale=1",
+    },
+  ],
+});
 </script>
 <template>
-    <nuxt-layout>
-        <base-network />
-           <NuxtPage />
-     </nuxt-layout>
-    <u-notifications />
+  <nuxt-layout>
+    <base-network />
+    <NuxtPage />
+  </nuxt-layout>
+  <u-notifications />
 </template>
 <style>
 .page-enter-active,

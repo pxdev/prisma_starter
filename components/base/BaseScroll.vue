@@ -1,8 +1,7 @@
-<script setup >
-import Lenis from 'lenis'
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+<script setup>
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 onMounted(() => {
   const lenis = new Lenis({
@@ -10,7 +9,7 @@ onMounted(() => {
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
 
-  lenis.on('scroll', ScrollTrigger.update);
+  lenis.on("scroll", ScrollTrigger.update);
 
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
@@ -25,13 +24,10 @@ onMounted(() => {
 
   requestAnimationFrame(raf);
 });
-
 </script>
 
 <template>
-<slot></slot>
+  <slot></slot>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

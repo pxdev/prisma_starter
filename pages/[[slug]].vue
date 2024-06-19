@@ -1,58 +1,44 @@
 <script setup>
+const localePath = useLocalePath();
+const route = useRoute();
+const pageSlug = route.params.slug;
 
-
-const localePath = useLocalePath()
-const route = useRoute()
-const pageSlug = route.params.slug
-
-const {
-  data: module,
-  error,
-} = await useAsyncData(pageSlug, () => $fetch(`/api/page/${pageSlug}`, {
-  method: 'GET',
-}))
+const { data: module, error } = await useAsyncData(pageSlug, () =>
+  $fetch(`/api/page/${pageSlug}`, {
+    method: "GET",
+  }),
+);
 
 const breadCrumbs = ref([
   {
-    label: 'Home',
-    to: localePath('/')
+    label: "Home",
+    to: localePath("/"),
   },
   {
     label: module.value?.data?.title,
-  }
-])
-
-
+  },
+]);
 </script>
 
 <template>
-  <loader/>
+  <loader />
 
- <page-not-found v-if="error" />
+  <page-not-found v-if="error" />
 
-  <main v-else >
+  <main v-else>
+    <pages-header :bread-crumbs="breadCrumbs" :title="module.data.title" />
 
-    <pages-header :bread-crumbs="breadCrumbs" :title="module.data.title"   />
-
-    <div class=" bg-red-200">
-      
-      <section v-for="(component, index) in module.data?.page_sections" :key="index+'section'">
+    <div class="bg-red-200">
+      <section
+        v-for="(component, index) in module.data?.page_sections"
+        :key="index + 'section'"
+      >
         <component :is="`Lazy${component.component_name}`" />
       </section>
 
-      <pre>{{module}}</pre>
-
-
-
+      <pre>{{ module }}</pre>
     </div>
   </main>
-
-
-
-
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

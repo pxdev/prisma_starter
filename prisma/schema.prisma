@@ -27,6 +27,7 @@ model User {
   password              String
   salt                  String
   last_login_ip_address String
+  avatar                String?
   current_logged_in_at  DateTime   @default(now())
   last_logged_in_at     DateTime   @default(now())
   created_at            DateTime   @default(now())
@@ -48,9 +49,9 @@ model Item {
   district       String
   bedroom_count  Int
   bathroom_count Int
+  garage_count   Int            @default(0)
   size           Float
   year_built     Int
-  fixtures       String
   status         ItemStatus     @default(ACTIVE)
   item_category  ItemCategory[]
   for_sale       Boolean        @default(true)
@@ -73,21 +74,25 @@ enum ItemStatus {
 }
 
 model ItemCategory {
-  id    String @id @default(cuid())
-  name  String
-  items Item[]
+  id      String  @id @default(cuid())
+  name    String
+  icon    String?
+  items   Item[]
+  Media   Media?  @relation(fields: [mediaId], references: [id])
+  mediaId String?
 }
 
 model Media {
-  id         String   @id @default(cuid())
-  name       String
-  path       String
-  item_id    String?
-  item       Item?    @relation(fields: [item_id], references: [id])
-  user_id    String
-  user       User     @relation("UserMedia", fields: [user_id], references: [id])
-  created_at DateTime @default(now())
-  banner     Banner[]
+  id           String         @id @default(cuid())
+  name         String
+  path         String
+  item_id      String?
+  item         Item?          @relation(fields: [item_id], references: [id])
+  user_id      String
+  user         User           @relation("UserMedia", fields: [user_id], references: [id])
+  created_at   DateTime       @default(now())
+  banner       Banner[]
+  itemCategory ItemCategory[]
 }
 
 model Bookmark {

@@ -1,51 +1,56 @@
-import { prisma } from '~~/db'
-import { defineEventHandler, getQuery, H3Error, createError, sendError } from 'h3'
+import { prisma } from "~~/db";
+import {
+  defineEventHandler,
+  getQuery,
+  H3Error,
+  createError,
+  sendError,
+} from "h3";
 
-const moduleName = 'Pages'
+const moduleName = "Pages";
 
 export default defineEventHandler(async (event) => {
-    try {
-        assertMethod(event, 'GET')
+  try {
+    assertMethod(event, "GET");
 
-        // Get the query parameters for pagination
-        const query = getQuery(event)
-        const search = query.search as string
+    // Get the query parameters for pagination
+    const query = getQuery(event);
+    const search = query.search as string;
 
-        // Fetch the total count
-        const total = await prisma.page.count()
+    // Fetch the total count
+    const total = await prisma.page.count();
 
-        // Fetch the items based on the query parameters
-        const module = await prisma.page.findMany({
-             orderBy: {
-                created_at: 'asc',
-            },
-            where: {
-                status: 'PUBLISHED',
-                title: {
-                    contains: search,
-                },
-              },
+    // Fetch the items based on the query parameters
+    const module = await prisma.page.findMany({
+      orderBy: {
+        created_at: "asc",
+      },
+      where: {
+        status: "PUBLISHED",
+        title: {
+          contains: search,
+        },
+      },
+    });
 
-        })
+    // Calculate total page
 
-        // Calculate total page
-
-        // Return the data and pagination details as JSON response
-        return {
-            statusCode: 200,
-            statusMessage: `Successfully fetched ${moduleName} data`,
-            data: {
-                module,
-                total,
-            },
-        }
-    } catch (error) {
-        console.error(error)
-        const err = createError({
-            statusCode: 500,
-            statusMessage: `Error fetching ${moduleName} data`,
-            data: error,
-        })
-        sendError(event, err)
-    }
-})
+    // Return the data and pagination details as JSON response
+    return {
+      statusCode: 200,
+      statusMessage: `Successfully fetched ${moduleName} data`,
+      data: {
+        module,
+        total,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    const err = createError({
+      statusCode: 500,
+      statusMessage: `Error fetching ${moduleName} data`,
+      data: error,
+    });
+    sendError(event, err);
+  }
+});

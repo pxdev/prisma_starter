@@ -1,45 +1,45 @@
 <script setup>
 const props = defineProps({
-    name: String,
-    email: String,
-})
+  name: String,
+  email: String,
+});
 
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 const logout = async () => {
-    let { success } = await $fetch('/api/auth/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+  let { success } = await $fetch("/api/auth/logout", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((data) => {
+      return data;
     })
-        .then((data) => {
-            return data
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    .catch((error) => {
+      console.log(error);
+    });
 
-    if (success) {
-        navigateTo(localePath('/auth/login'))
-    }
-}
+  if (success) {
+    navigateTo(localePath("/auth/login"));
+  }
+};
 </script>
 
 <template>
-    <div>
-        <u-popover v-if="props.name" :popper="{ placement: 'bottom-start' }">
-            <div class="flex items-center gap-2">
-                <u-avatar :alt="props.name" />
-                <div>
-                    <p class="text-xs opacity-70">{{ props.name }}</p>
-                </div>
-            </div>
-            <template #panel>
-                <div class="p-4">
-                    <p class="text-xs">{{ $t('Signed in as') }} {{ props.name }}</p>
-                    <u-button @click="logout">Logout</u-button>
-                </div>
-            </template>
-        </u-popover>
-    </div>
+  <div>
+    <u-popover v-if="props.name" :popper="{ placement: 'bottom-start' }">
+      <div class="flex items-center gap-2">
+        <u-avatar :alt="props.name" />
+        <div>
+          <p class="text-xs opacity-70">{{ props.name }}</p>
+        </div>
+      </div>
+      <template #panel>
+        <div class="p-4">
+          <p class="text-xs">{{ $t("Signed in as") }} {{ props.name }}</p>
+          <u-button @click="logout">Logout</u-button>
+        </div>
+      </template>
+    </u-popover>
+  </div>
 </template>
 
 <style scoped></style>
