@@ -2,11 +2,15 @@
 import { z } from "zod";
 
 definePageMeta({
-  middleware: ["not-auth"],
   layout: "auth",
-});
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  }
+})
 
 const { t } = useI18n();
+const {signIn} = useAuth();
 const toast = useToast();
 
 const isSubmitting = ref(false);
@@ -33,34 +37,29 @@ const schema = z.object({
     .email(),
 });
 
-const handleSubmit = async () => {
+const login = async (email, password) => {
   isSubmitting.value = true;
-  await useAsyncData("login", () =>
-    $fetch(`/api/auth/login`, {
-      method: "POST",
-      body: JSON.stringify(form.value),
-      onResponse(context) {
-        const response = context.response._data;
-        if (response.success) {
-          toast.add({
-            title: "Success",
-            description: response.statusMessage,
-            color: "teal",
-          });
 
-          navigateTo(localePath("/"));
-        } else {
-          toast.add({
-            title: "Error",
-            description: response.statusMessage,
-            color: "red",
-          });
-        }
-        isSubmitting.value = false;
-      },
-    }),
-  );
-};
+  const response = await signIn('credentials', { redirect:false, email, password })
+   if (response.ok) {
+    toast.add({
+      title: "Success",
+      description: 'Logged in successfully!',
+      color: "teal",
+    });
+    navigateTo(localePath("/"));
+  } else {
+    toast.add({
+      title: "Error",
+      description: 'Invalid email or password',
+      color: "red",
+    })
+  }
+  isSubmitting.value = false;
+
+
+}
+
 </script>
 
 <template>
@@ -105,13 +104,13 @@ const handleSubmit = async () => {
             :state="form"
             class="login-form"
             @error="onError"
-            @submit="handleSubmit"
+            @submit="login"
           >
             <div class="space-y-4">
-              <u-form-group :label="$t('auth.email')" name="email">
+              <u-form-group :label="$t('forms.email')" name="email">
                 <u-input v-model="form.email" size="lg" />
               </u-form-group>
-              <u-form-group :label="$t('auth.password')" name="password">
+              <u-form-group :label="$t('forms.password')" name="password">
                 <u-input v-model="form.password" size="lg" type="password" />
               </u-form-group>
             </div>
@@ -122,7 +121,7 @@ const handleSubmit = async () => {
                 :loading="isSubmitting"
                 block
                 size="lg"
-                @click="handleSubmit"
+                @click="login(form.email, form.password)"
                 >{{ $t("auth.login") }}</u-button
               >
               <u-button

@@ -1,4 +1,12 @@
 <script setup>
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: "Media Manager",
+  },
+});
+
 const { handleFileInput, files } = useFileStorage();
 const toast = useToast();
 const user = useCookie("user");
@@ -139,7 +147,7 @@ const removeFromSelectedMedia = (index) => {
 
 <template>
   <section ref="mediaGallery">
-    <div class="media-manager">
+     <div class="mediaManager">
       <div class="relative border border-dashed bg-gray-50/50 p-4">
         <div
           class="mb-2 border flex flex-col lg:flex-row gap-2 items-center justify-between border-dashed p-2 media-toolbar"

@@ -54,10 +54,8 @@ useHead({
 <template>
   <base-scroll>
     <loader />
-
     <pages-header title="Properties" :bread-crumbs="breadCrumbs" />
-
-    <main class="bg-gray-100 py-20">
+    <main v-if="module" class="bg-gray-100 py-20">
       <u-container>
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"

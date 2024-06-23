@@ -1,5 +1,6 @@
 <script setup>
 const localePath = useLocalePath();
+definePageMeta({ middleware: 'auth' })
 
 const breadCrumbs = ref([
   {

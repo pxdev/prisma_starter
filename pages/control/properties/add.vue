@@ -1,7 +1,5 @@
 <script setup>
-definePageMeta({
-  middleware: ["auth"],
-});
+definePageMeta({ middleware: 'auth' })
 
 const localePath = useLocalePath();
 
@@ -26,18 +24,21 @@ const breadCrumbs = ref([
 </script>
 
 <template>
+  <base-scroll>
+  <loader />
   <pages-header
     :bread-crumbs="breadCrumbs"
     :title="$t('Add New') + ' ' + $t(moduleName.singular)"
   />
   <main class="py-12">
     <u-container>
-      <div class="flex gap-4">
+      <div class="flex items-start gap-8">
         <control-navigation />
         <property-form />
       </div>
     </u-container>
   </main>
+  </base-scroll>
 </template>
 
 <style scoped></style>

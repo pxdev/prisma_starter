@@ -5,9 +5,6 @@ export default defineAppConfig({
   ui: {
     primary: "themeColor",
     gray: "neutral",
-    container: {
-      constrained: "max-w-[90%]",
-    },
     slideover: {
       overlay: {
         background: "bg-gray-900/70",
@@ -31,6 +28,7 @@ export default defineAppConfig({
     card: {
       shadow: "",
       base: "",
+      rounded: "rounded-none",
     },
     input: {
       color: {

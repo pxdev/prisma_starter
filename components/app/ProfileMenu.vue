@@ -5,26 +5,13 @@ const props = defineProps({
 });
 
 const localePath = useLocalePath();
-const logout = async () => {
-  let { success } = await $fetch("/api/auth/logout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((data) => {
-      return data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
 
-  if (success) {
-    navigateTo(localePath("/auth/login"));
-  }
-};
+const {  signOut  } = useAuth()
+
 </script>
 
 <template>
-  <div>
+   <div>
     <u-popover v-if="props.name" :popper="{ placement: 'bottom-start' }">
       <div class="flex items-center gap-2">
         <u-avatar :alt="props.name" />
@@ -35,7 +22,7 @@ const logout = async () => {
       <template #panel>
         <div class="p-4">
           <p class="text-xs">{{ $t("Signed in as") }} {{ props.name }}</p>
-          <u-button @click="logout">Logout</u-button>
+          <u-button @click="signOut">{{ $t('Logout') }}</u-button>
         </div>
       </template>
     </u-popover>

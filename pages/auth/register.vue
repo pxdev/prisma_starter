@@ -2,9 +2,12 @@
 import { z } from "zod";
 
 definePageMeta({
-  middleware: ["not-auth"],
   layout: "auth",
-});
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/',
+  }
+})
 
 const toast = useToast();
 
@@ -119,23 +122,23 @@ const onError = async (event) => {
             @submit="handleSubmit"
           >
             <div class="gap-4 space-y-4">
-              <u-form-group :label="$t('auth.name')" name="name" required>
+              <u-form-group :label="$t('forms.name')" name="name" required>
                 <u-input v-model="form.name" size="lg" />
               </u-form-group>
-              <u-form-group :label="$t('auth.surname')" name="surname" required>
+              <u-form-group :label="$t('forms.surname')" name="surname" required>
                 <u-input v-model="form.surname" size="lg" />
               </u-form-group>
-              <u-form-group :label="$t('auth.email')" name="email" required>
+              <u-form-group :label="$t('forms.email')" name="email" required>
                 <u-input v-model="form.email" size="lg" />
               </u-form-group>
               <u-form-group
                 name="password"
-                :label="$t('auth.password')"
+                :label="$t('forms.password')"
                 required
               >
                 <u-input v-model="form.password" size="lg" type="password" />
               </u-form-group>
-              <u-form-group name="phone" :label="$t('auth.phone')" required>
+              <u-form-group name="phone" :label="$t('forms.phone')" required>
                 <u-input v-model="form.phone" size="lg" />
               </u-form-group>
               <u-form-group

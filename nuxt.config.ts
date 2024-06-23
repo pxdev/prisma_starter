@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     "nuxt-file-storage",
     "nuxt-swiper",
     "nuxt-mailer",
+    "@sidebase/nuxt-auth"
   ],
   fileStorage: {
     mount: "public/uploads",
@@ -81,6 +82,8 @@ export default defineNuxtConfig({
     families: {
       Cairo: [300, 400, 500, 700, 900],
     },
+    download: false,
+    useStylesheet: true
   },
   build: {
     transpile: ["gsap"],

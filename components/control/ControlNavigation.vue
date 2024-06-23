@@ -31,7 +31,7 @@ const navigation = ref([
 </script>
 
 <template>
-  <div class="w-60 p-2 border rounded">
+  <div class="w-72 sticky top-20 p-2 border">
     <nuxt-link
       v-for="item in navigation"
       :key="item.name"
