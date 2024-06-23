@@ -6,12 +6,11 @@ const props = defineProps({
 
 const localePath = useLocalePath();
 
-const {  signOut  } = useAuth()
-
+const { signOut } = useAuth();
 </script>
 
 <template>
-   <div>
+  <div>
     <u-popover v-if="props.name" :popper="{ placement: 'bottom-start' }">
       <div class="flex items-center gap-2">
         <u-avatar :alt="props.name" />
@@ -22,7 +21,7 @@ const {  signOut  } = useAuth()
       <template #panel>
         <div class="p-4">
           <p class="text-xs">{{ $t("Signed in as") }} {{ props.name }}</p>
-          <u-button @click="signOut">{{ $t('Logout') }}</u-button>
+          <u-button @click="signOut">{{ $t("Logout") }}</u-button>
         </div>
       </template>
     </u-popover>

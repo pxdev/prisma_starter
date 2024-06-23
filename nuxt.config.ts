@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       version: pkg.version,
-      JWT_TOKEN_SECRET: process.env.JWT_TOKEN_SECRET,
     },
     mailerUser: "",
     mailerPass: "",
@@ -33,7 +32,6 @@ export default defineNuxtConfig({
   plugins: ["~/plugins/error-handler.js"],
 
   modules: [
-    "@pinia/nuxt",
     "@vueuse/nuxt",
     "@nuxt/ui",
     "nuxt-icon",
@@ -43,7 +41,7 @@ export default defineNuxtConfig({
     "nuxt-file-storage",
     "nuxt-swiper",
     "nuxt-mailer",
-    "@sidebase/nuxt-auth"
+    "@sidebase/nuxt-auth",
   ],
   fileStorage: {
     mount: "public/uploads",
@@ -83,7 +81,7 @@ export default defineNuxtConfig({
       Cairo: [300, 400, 500, 700, 900],
     },
     download: false,
-    useStylesheet: true
+    useStylesheet: true,
   },
   build: {
     transpile: ["gsap"],

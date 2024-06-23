@@ -31,9 +31,7 @@ onUnmounted(() => {
   ctx.revert();
 });
 
-
 const searchParams = ref({});
-
 </script>
 
 <template>

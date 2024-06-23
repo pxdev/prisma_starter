@@ -5,12 +5,12 @@ definePageMeta({
   layout: "auth",
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/',
-  }
-})
+    navigateAuthenticatedTo: "/",
+  },
+});
 
 const { t } = useI18n();
-const {signIn} = useAuth();
+const { signIn } = useAuth();
 const toast = useToast();
 
 const isSubmitting = ref(false);
@@ -40,26 +40,27 @@ const schema = z.object({
 const login = async (email, password) => {
   isSubmitting.value = true;
 
-  const response = await signIn('credentials', { redirect:false, email, password })
-   if (response.ok) {
+  const response = await signIn("credentials", {
+    redirect: false,
+    email,
+    password,
+  });
+  if (response.ok) {
     toast.add({
       title: "Success",
-      description: 'Logged in successfully!',
+      description: "Logged in successfully!",
       color: "teal",
     });
     navigateTo(localePath("/"));
   } else {
     toast.add({
       title: "Error",
-      description: 'Invalid email or password',
+      description: "Invalid email or password",
       color: "red",
-    })
+    });
   }
   isSubmitting.value = false;
-
-
-}
-
+};
 </script>
 
 <template>

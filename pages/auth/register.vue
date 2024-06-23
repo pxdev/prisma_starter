@@ -5,9 +5,9 @@ definePageMeta({
   layout: "auth",
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: '/',
-  }
-})
+    navigateAuthenticatedTo: "/",
+  },
+});
 
 const toast = useToast();
 
@@ -125,7 +125,11 @@ const onError = async (event) => {
               <u-form-group :label="$t('forms.name')" name="name" required>
                 <u-input v-model="form.name" size="lg" />
               </u-form-group>
-              <u-form-group :label="$t('forms.surname')" name="surname" required>
+              <u-form-group
+                :label="$t('forms.surname')"
+                name="surname"
+                required
+              >
                 <u-input v-model="form.surname" size="lg" />
               </u-form-group>
               <u-form-group :label="$t('forms.email')" name="email" required>

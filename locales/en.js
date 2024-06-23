@@ -3,7 +3,7 @@ export default {
     OpenMediaManager: "Open Media Manager",
     ClearSelectedMedia: "Clear Selected Media",
   },
-  headers:{
+  headers: {
     dashboard: "Dashboard",
     properties: "Properties",
     users: "Users",
@@ -25,7 +25,7 @@ export default {
   validation: {
     requiredError: "This field is required",
   },
-  forms:{
+  forms: {
     name: "Name",
     password: "Password",
     email: "Email",
@@ -53,5 +53,5 @@ export default {
     save: "Save",
     cancel: "Cancel",
     delete: "Delete",
-  }
+  },
 };

@@ -15,7 +15,7 @@ const localePath = useLocalePath();
 const toast = useToast();
 const formRef = ref(null);
 const form = ref({
-  images: []
+  images: [],
 });
 
 const resetForm = () => {
@@ -82,15 +82,17 @@ const handleSubmit = async () => {
     >
       <u-card class="mb-6">
         <template #header>
-          <heading is="h4">{{
-            $t("headers.propertyInformation")
-          }}</heading>
+          <heading is="h4">{{ $t("headers.propertyInformation") }}</heading>
         </template>
         <div class="pb-4 space-y-6">
           <u-form-group :label="$t('forms.title')" name="name" required>
             <u-input v-model="form.name" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.description')" name="description" required>
+          <u-form-group
+            :label="$t('forms.description')"
+            name="description"
+            required
+          >
             <u-textarea v-model="form.name" placeholder="" size="lg" />
           </u-form-group>
           <u-form-group :label="$t('forms.price')" name="price" required>
@@ -99,10 +101,18 @@ const handleSubmit = async () => {
           <u-form-group :label="$t('forms.address')" name="address" required>
             <u-input v-model="form.address" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.bedrooms')" name="bedroomCount" required>
+          <u-form-group
+            :label="$t('forms.bedrooms')"
+            name="bedroomCount"
+            required
+          >
             <u-input v-model="form.bedroom_count" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.bathrooms')" name="bathroomCount" required>
+          <u-form-group
+            :label="$t('forms.bathrooms')"
+            name="bathroomCount"
+            required
+          >
             <u-input v-model="form.bathroom_count" placeholder="" size="lg" />
           </u-form-group>
           <u-form-group :label="$t('forms.garage')" name="garageCount" required>
@@ -111,53 +121,61 @@ const handleSubmit = async () => {
           <u-form-group :label="$t('forms.area')" name="area" required>
             <u-input v-model="form.area" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.yearBuilt')" name="yearBuilt" required>
+          <u-form-group
+            :label="$t('forms.yearBuilt')"
+            name="yearBuilt"
+            required
+          >
             <u-input v-model="form.year_built" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.yearBuilt')" name="yearBuilt" required>
+          <u-form-group
+            :label="$t('forms.yearBuilt')"
+            name="yearBuilt"
+            required
+          >
             <u-input v-model="form.year_built" placeholder="" size="lg" />
           </u-form-group>
-          <u-form-group :label="$t('forms.mediaManager')" name="mediaManager" required>
-            <base-media-management v-model="form.images"/>
+          <u-form-group
+            :label="$t('forms.mediaManager')"
+            name="mediaManager"
+            required
+          >
+            <base-media-management v-model="form.images" />
           </u-form-group>
-
-
         </div>
-
       </u-card>
       <form-action>
         <u-button
-            color="gray"
-            variant="outline"
-            size="lg"
-            class="px-8"
-            :to="localePath(`/`)"
+          color="gray"
+          variant="outline"
+          size="lg"
+          class="px-8"
+          :to="localePath(`/`)"
         >
           {{ $t("Cancel") }}
         </u-button>
         <div class="flex gap-2">
           <u-button
-              class="px-8"
-              color="black"
-              size="lg"
-              variant="outline"
-              @click="resetForm"
-          >{{ $t("Reset") }}
+            class="px-8"
+            color="black"
+            size="lg"
+            variant="outline"
+            @click="resetForm"
+            >{{ $t("Reset") }}
           </u-button>
           <u-button
-              :loading="isSubmitting"
-              class="px-8"
-              color="black"
-              size="lg"
-              type="submit"
-              variant="solid"
-              @submit="handleSubmit"
+            :loading="isSubmitting"
+            class="px-8"
+            color="black"
+            size="lg"
+            type="submit"
+            variant="solid"
+            @submit="handleSubmit"
           >
             {{ $t("Save") }}
           </u-button>
         </div>
       </form-action>
-
     </u-form>
   </div>
 </template>
