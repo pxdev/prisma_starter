@@ -26,8 +26,8 @@ export default NuxtAuthHandler({
         }
 
         const isPasswordValid = await compare(
-          credentials?.password,
-          user.password,
+            credentials?.password,
+            user.password,
         );
 
         if (!isPasswordValid) {

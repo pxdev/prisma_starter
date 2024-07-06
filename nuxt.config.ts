@@ -43,6 +43,9 @@ export default defineNuxtConfig({
     "nuxt-mailer",
     "@sidebase/nuxt-auth",
   ],
+  auth: {
+    isEnabled: true,
+  },
   fileStorage: {
     mount: "public/uploads",
   },

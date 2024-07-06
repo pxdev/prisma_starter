@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     const fileNames = [];
 
     for (const file of files) {
-      const fileName = await storeFileLocally(file.content, 20, `/${user_id}`);
+      const fileName = await storeFileLocally(file, 20, `/${user_id}`);
       fileNames.push(fileName);
 
       await prisma.media.create({
