@@ -8,6 +8,8 @@ const moduleName = ref({
   plural: "properties",
 });
 
+const showCategoriesModal = ref(false);
+
 const breadCrumbs = ref([
   {
     label: "Home",
@@ -26,6 +28,14 @@ const breadCrumbs = ref([
 <template>
   <base-scroll>
     <loader />
+
+    <categories-modal
+      :categories-modal="showCategoriesModal"
+      @close="showCategoriesModal = false"
+      category-name="properties"
+      end-point="control/properties/categories/categories"
+    />
+
     <pages-header
       :bread-crumbs="breadCrumbs"
       :title="$t('Add New') + ' ' + $t(moduleName.singular)"
@@ -33,8 +43,19 @@ const breadCrumbs = ref([
     <main class="py-12">
       <u-container>
         <div class="flex items-start gap-8">
-          <control-navigation />
-          <property-form />
+          <div class="sticky top-24 w-60">
+            <control-navigation />
+          </div>
+          <div class="flex-1">
+            <div class="heading flex items-center mb-4 justify-between">
+              <heading is="h2">{{ $t("Properties") }}</heading>
+
+              <u-button size="lg" @click="showCategoriesModal = true">{{
+                $t("showCategories")
+              }}</u-button>
+            </div>
+            <property-form />
+          </div>
         </div>
       </u-container>
     </main>

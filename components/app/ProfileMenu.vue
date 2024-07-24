@@ -1,29 +1,32 @@
 <script setup>
-const props = defineProps({
-  name: String,
-  email: String,
-});
-
 const localePath = useLocalePath();
+const { signOut, user } = useAuth();
+const toast = useToast();
 
-const { signOut } = useAuth();
+const logout = async () => {
+  await signOut();
+  toast.add({
+    title: "Success",
+    description: "You have successfully logged out",
+    color: "teal",
+  });
+};
 </script>
 
 <template>
   <div>
-    <u-popover v-if="props.name" :popper="{ placement: 'bottom-start' }">
+    <u-popover :popper="{ placement: 'bottom-start' }">
       <div class="flex items-center gap-2">
-        <u-avatar :alt="props.name" />
+        <u-avatar :alt="user.name" :src="user.avatar" />
         <div>
-          <p class="text-xs opacity-70">{{ props.name }}</p>
+          <p class="text-xs opacity-70">{{ user.name }}</p>
         </div>
       </div>
       <template #panel>
-        <div class="p-4">
-          <p class="text-xs">{{ $t("Signed in as") }} {{ props.name }}</p>
-          <u-button @click="signOut">{{ $t("Logout") }}</u-button>
+        <div class="text-sm w-44 p-2">
+           <control-navigation />
         </div>
-      </template>
+       </template>
     </u-popover>
   </div>
 </template>

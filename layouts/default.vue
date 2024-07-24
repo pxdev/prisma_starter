@@ -19,7 +19,7 @@ onMounted(() => {
   <Html
     :dir="localeProperties.dir"
     :lang="head.htmlAttrs.lang"
-    class="h-full font-cairo"
+    class="h-full bg-gray-50 font-cairo"
   >
     <Body>
       <div>

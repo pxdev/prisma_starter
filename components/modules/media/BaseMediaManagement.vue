@@ -1,43 +1,49 @@
 <script setup>
+// Define component props
 const props = defineProps({
-  label: {
-    type: String,
-    default: "Media Manager",
+  single: {
+    type: Boolean,
+    default: false,
   },
 });
 
+// Import required composable
 const { handleFileInput, files } = useFileStorage();
+const { t } = useI18n();
 const toast = useToast();
-const user = useCookie("user");
+const { user } = useAuth();
 
+// Reactive references
+const userId = ref(user.value?.id);
 const fileInput = ref(null);
 const page = ref(1);
 const pageCount = ref(20);
-
 const mediaModal = ref(false);
 const activeMediaTab = ref("browse-file");
 
+// Media tabs configuration
 const mediaTabs = [
   {
-    title: "Select Images",
+    title: "mediaManager.selectImages",
     icon: "ic:round-image-search",
     slot: "browse-file",
   },
   {
-    title: "Upload Images",
+    title: "mediaManager.uploadImages",
     icon: "ic:outline-drive-folder-upload",
     slot: "upload-file",
   },
 ];
 
+// Fetch user files from the server
 const {
   data: media,
   pending: pendingMedia,
   refresh: refreshMedia,
-} = await useFetch("/api/media/user_files", {
+} = await useFetch("/api/public/media/user_files", {
   method: "POST",
   body: {
-    user_id: user.value?.id,
+    user_id: userId.value,
   },
   params: {
     page: page,
@@ -46,45 +52,50 @@ const {
   watch: [page, pageCount],
 });
 
+// Function to open media modal
 const browseMedia = async () => {
   mediaModal.value = true;
 };
 
+// Function to set active media tab
 const setActiveMediaTab = (tab) => {
   activeMediaTab.value = tab;
 };
 
+// Function to clear selected files
 const clearSelectedBrowseFile = () => {
   files.value = [];
   fileInput.value.value = null;
 };
 
+// Function to remove file before upload
 const removeBeforeUpload = (index) => {
   files.value.splice(index, 1);
 };
 
+// Function to upload files to the server
 const uploadFiles = async () => {
-  await $fetch("/api/media/files", {
+  await $fetch("/api/public/media/files", {
     method: "POST",
     body: {
       files: files.value,
-      user_id: user.value?.id,
+      user_id: userId.value,
     },
     onResponse(context) {
       const statusCode = context.response._data.statusCode;
       if (statusCode === 200) {
         toast.add({
-          title: "Success",
-          description: "Files uploaded successfully",
-          color: "green",
+          title: t("toastMessages.success"),
+          description: t("toastMessages.successfullyUploaded"),
+          color: "teal",
         });
         refreshMedia();
         clearSelectedBrowseFile();
         activeMediaTab.value = "browse-file";
       } else {
         toast.add({
-          title: "Error",
-          description: "Files could not be uploaded",
+          title: t("toastMessages.error"),
+          description: t("toastMessages.failedUpload"),
           color: "red",
         });
       }
@@ -92,32 +103,31 @@ const uploadFiles = async () => {
   });
 };
 
+// Function to remove file from the server
 const removeFromServer = async (item) => {
-  await $fetch(`/api/media/${item.id}`, {
+  await $fetch(`/api/public/media/${item.id}`, {
     method: "DELETE",
     params: {
       id: item.id,
-      user_id: user.value?.id,
+      user_id: userId.value,
       name: item.name,
     },
     onResponse(context) {
       const statusCode = context.response._data.statusCode;
       if (statusCode === 200) {
         toast.add({
-          title: "Success",
-          description: "File deleted successfully",
-          color: "green",
+          title: t("toastMessages.success"),
+          description: t("toastMessages.successfullyDeleted"),
+          color: "teal",
         });
-
         refreshMedia();
-
         selectedFiles.value = selectedFiles.value.filter(
           (file) => file.id !== item.id,
         );
       } else {
         toast.add({
-          title: "Error",
-          description: "File could not be deleted",
+          title: t("toastMessages.error"),
+          description: t("toastMessages.errorDelete"),
           color: "red",
         });
       }
@@ -125,27 +135,39 @@ const removeFromServer = async (item) => {
   });
 };
 
+// Define model for selected files
 const selectedFiles = defineModel();
 
+// Function to clear selected media
 const clearSelectedMedia = () => {
   selectedFiles.value = [];
 };
 
+// Function to add files to selected list
 const addSelectedFiles = (file) => {
+  if (props.single) {
+    selectedFiles.value = [file];
+    return;
+  }
+
   if (!selectedFiles.value.find((f) => f.id === file.id)) {
     selectedFiles.value.push(file);
-  } else {
-    selectedFiles.value = selectedFiles.value.filter((f) => f.id !== file.id);
   }
 };
 
+// Function to remove file from selected list
+const removeSelectedFiles = (item) => {
+  selectedFiles.value = selectedFiles.value.filter((f) => f.id !== item.id);
+};
+
+// Function to remove file from selected media by index
 const removeFromSelectedMedia = (index) => {
   selectedFiles.value.splice(index, 1);
 };
 </script>
 
 <template>
-  <section ref="mediaGallery">
+  <section v-if="userId" ref="mediaGallery">
     <div class="mediaManager">
       <div class="relative border border-dashed bg-gray-50/50 p-4">
         <div
@@ -170,7 +192,7 @@ const removeFromSelectedMedia = (index) => {
             <span class="font-semibold underline">{{
               selectedFiles.length
             }}</span
-            >{{ $t("Selected") }}
+            >{{ $t("mediaManager.selected") }}
           </p>
         </div>
         <div
@@ -214,10 +236,10 @@ const removeFromSelectedMedia = (index) => {
           <div class="text-center my-10 bg-gray-50 dark:bg-gray-900 p-10">
             <icon class="w-6 h-6" name="solar:card-search-line-duotone" />
             <h3 class="font-semibold mb-1">
-              {{ $t("Select Images to display") }}
+              {{ $t("mediaManager.selectImagesToDisplay") }}
             </h3>
             <p class="opacity-80 text-sm">
-              {{ $t("Open the media manager to select images to display") }}
+              {{ $t("mediaManager.OpenMediaManagerToSelect") }}
             </p>
           </div>
         </div>
@@ -226,7 +248,7 @@ const removeFromSelectedMedia = (index) => {
     <u-modal v-model="mediaModal" :ui="{ width: 'sm:max-w-5xl' }">
       <div class="flex items-center justify-between px-5 pt-5">
         <heading is="h3" :total="media?.data?.total">{{
-          $t("Global media manager")
+          $t("mediaManager.MediaManager")
         }}</heading>
         <u-button color="gray" variant="link" @click="mediaModal = false">
           <icon class="h-6 w-6" name="material-symbols:close-rounded" />
@@ -275,17 +297,22 @@ const removeFromSelectedMedia = (index) => {
                   <icon class="h-4 w-4" name="ph:trash" />
                 </u-button>
               </div>
-
               <u-button
+                v-if="!selectedFiles.find((file) => item.id === file.id)"
                 class="absolute bottom-2 left-2 z-10 opacity-0 transition-all delay-100 group-hover:opacity-100"
                 size="xs"
                 @click="addSelectedFiles(item)"
               >
-                {{
-                  selectedFiles.find((file) => item.id === file.id)
-                    ? $t("Unselect")
-                    : $t("Select")
-                }}
+                {{ $t("mediaManager.select") }}
+              </u-button>
+              <u-button
+                v-else
+                class="absolute bottom-2 left-2 z-10 opacity-0 transition-all delay-100 group-hover:opacity-100"
+                color="green"
+                size="xs"
+                @click="removeSelectedFiles(item)"
+              >
+                {{ $t("mediaManager.deSelect") }}
               </u-button>
 
               <img
@@ -299,10 +326,10 @@ const removeFromSelectedMedia = (index) => {
             <div class="text-center my-10 bg-gray-50 dark:bg-gray-900 p-10">
               <icon class="w-6 h-6" name="solar:card-search-line-duotone" />
               <h3 class="font-semibold mb-1">
-                {{ $t("No media found") }}
+                {{ $t("mediaManager.noMediaFound") }}
               </h3>
               <p class="opacity-80 text-sm">
-                {{ $t("Click on the upload tab to start uploading files") }}
+                {{ $t("mediaManager.clickToStartUploading") }}
               </p>
             </div>
           </div>
@@ -349,22 +376,18 @@ const removeFromSelectedMedia = (index) => {
                     <u-badge color="green" size="sm" variant="outline">{{
                       files.length
                     }}</u-badge>
-                    {{ $t("files selected") }}
+                    {{ $t("mediaManager.selectedFiles") }}
                   </p>
                   <p class="text-sm">
-                    {{
-                      $t(
-                        'Click "Start Uploading" to upload your files, making them accessible throughout the application.',
-                      )
-                    }}
+                    {{ $t("mediaManager.startUploadingMessage ") }}
                   </p>
                 </div>
                 <div v-else class="flex flex-col items-center gap-1">
                   <p class="font-semibold">
-                    {{ $t("No files selected") }}
+                    {{ $t("mediaManager.noFilesSelected") }}
                   </p>
                   <p class="text-sm">
-                    {{ $t("Click here to browse your system files..") }}
+                    {{ $t("mediaManager.noFilesSelectedMessage") }}
                   </p>
                 </div>
               </div>
@@ -410,7 +433,7 @@ const removeFromSelectedMedia = (index) => {
 
         <div class="flex justify-end gap-2 rounded-b-lg bg-gray-100/80 p-5">
           <u-button color="gray" @click="clearSelectedBrowseFile">{{
-            $t("Clear")
+            $t("forms.clear")
           }}</u-button>
           <u-button
             :disabled="files.length === 0"
@@ -418,7 +441,7 @@ const removeFromSelectedMedia = (index) => {
             size="lg"
             @click="uploadFiles"
           >
-            {{ $t("Start Uploading") }}
+            {{ $t("forms.startUploading") }}
           </u-button>
         </div>
       </div>

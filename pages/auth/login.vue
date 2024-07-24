@@ -3,14 +3,11 @@ import { z } from "zod";
 
 definePageMeta({
   layout: "auth",
-  auth: {
-    unauthenticatedOnly: true,
-    navigateAuthenticatedTo: "/",
-  },
 });
 
 const { t } = useI18n();
-const { signIn } = useAuth();
+const { signIn, signOut, session, status, cookies, getProviders } = useAuth();
+
 const toast = useToast();
 
 const isSubmitting = ref(false);
@@ -25,7 +22,7 @@ const onError = async (event) => {
 const localePath = useLocalePath();
 
 const form = ref({
-  email: "drpxdev@gmail.com",
+  email: "admin@admin.com",
   password: "p123321",
 });
 
@@ -39,26 +36,13 @@ const schema = z.object({
 
 const login = async (email, password) => {
   isSubmitting.value = true;
-
   const response = await signIn("credentials", {
-    redirect: false,
     email,
     password,
+    callbackUrl: "/",
+    redirect: false,
   });
-  if (response.ok) {
-    toast.add({
-      title: "Success",
-      description: "Logged in successfully!",
-      color: "teal",
-    });
-    navigateTo(localePath("/"));
-  } else {
-    toast.add({
-      title: "Error",
-      description: "Invalid email or password",
-      color: "red",
-    });
-  }
+
   isSubmitting.value = false;
 };
 </script>
@@ -137,6 +121,8 @@ const login = async (email, password) => {
           </u-form>
         </div>
         <!-- login form -->
+
+        <u-button @click="signOut">Sign out</u-button>
 
         <app-copyrights />
       </div>

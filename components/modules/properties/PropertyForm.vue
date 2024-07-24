@@ -80,7 +80,7 @@ const handleSubmit = async () => {
       @error="onError"
       @submit="handleSubmit"
     >
-      <u-card class="mb-6">
+      <u-card  class="mb-6">
         <template #header>
           <heading is="h4">{{ $t("headers.propertyInformation") }}</heading>
         </template>
@@ -93,7 +93,7 @@ const handleSubmit = async () => {
             name="description"
             required
           >
-            <u-textarea v-model="form.name" placeholder="" size="lg" />
+            <u-textarea v-model="form.description" placeholder="" size="lg" />
           </u-form-group>
           <u-form-group :label="$t('forms.price')" name="price" required>
             <u-input v-model="form.price" placeholder="" size="lg" />

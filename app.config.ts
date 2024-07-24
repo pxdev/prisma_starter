@@ -16,8 +16,7 @@ export default defineAppConfig({
       },
     },
     button: {
-      rounded: "rounded-none",
-    },
+     },
     formGroup: {
       base: "font-noto",
       error: "text-xs text-red-500 dark:text-red-400",
@@ -28,8 +27,7 @@ export default defineAppConfig({
     card: {
       shadow: "",
       base: "",
-      rounded: "rounded-none",
-    },
+     },
     input: {
       color: {
         white: {
@@ -38,8 +36,7 @@ export default defineAppConfig({
       },
     },
     select: {
-      rounded: "rounded-none",
-      color: {
+       color: {
         white: {
           outline: "shadow-none ring-gray-300/80 dark:ring-gray-700/60",
         },

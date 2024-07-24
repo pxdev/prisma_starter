@@ -1,18 +1,25 @@
-import CredentialsProvider from "next-auth/providers/credentials";
-import { NuxtAuthHandler } from "#auth";
-import { compare } from "bcrypt";
+import CredentialsProvider from "@auth/core/providers/credentials";
+import type { AuthConfig } from "@auth/core/types";
 import { prisma } from "~~/db";
+import { compare } from "bcrypt";
+import { NuxtAuthHandler } from "#auth";
 
-export default NuxtAuthHandler({
-  secret: process.env.AUTH_SECRET,
-  pages: {
-    signIn: "/auth/login",
-    signOut: "/auth/login",
-    error: "/auth/login",
-  },
+// The #auth virtual import comes from this module. You can use it on the client
+// and server side, however not every export is universal. For example do not
+// use sign-in and sign-out on the server side.
+
+const runtimeConfig = useRuntimeConfig();
+
+// Refer to Auth.js docs for more details
+
+export const authOptions: AuthConfig = {
+  secret: runtimeConfig.authJs.secret,
+
   providers: [
-    // @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
-    CredentialsProvider.default({
+    CredentialsProvider({
+      type: "credentials",
+      name: "credentials",
+
       async authorize(credentials: any) {
         const user = await prisma.user.findUnique({
           where: { email: credentials?.email },
@@ -26,8 +33,8 @@ export default NuxtAuthHandler({
         }
 
         const isPasswordValid = await compare(
-            credentials?.password,
-            user.password,
+          credentials?.password,
+          user.password,
         );
 
         if (!isPasswordValid) {
@@ -46,16 +53,23 @@ export default NuxtAuthHandler({
     async jwt({ token, user }: { token: any; user: any }) {
       if (user) {
         token.id = user.id;
-        token.nombre = user.name;
-        token.email = user.email;
+        token.name = user.name + " " + user.surname;
+        token.is_admin = user.is_admin;
+        token.is_item_owner = user.is_item_owner;
+        token.avatar = user.avatar;
       }
       return token;
     },
     async session({ session, token }: { session: any; token: any }) {
       session.user.id = token.id;
-      session.user.nombre = token.name;
-      session.user.email = token.email;
+      session.user.is_admin = token.is_admin;
+      session.user.is_item_owner = token.is_item_owner;
+      session.user.avatar = token.avatar;
       return session;
     },
   },
-});
+};
+
+export default NuxtAuthHandler(authOptions, runtimeConfig);
+// If you don't want to pass the full runtime config,
+//  you can pass something like this: { public: { authJs: { baseUrl: "" } } }

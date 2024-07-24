@@ -1,6 +1,6 @@
 <script setup>
 const localePath = useLocalePath();
-const { data } = useAuth();
+const { status } = useAuth();
 
 const pageY = ref(0);
 const mobileMenuOpen = ref(false);
@@ -70,8 +70,12 @@ const navLinks = [
         </div>
       </div>
       <div class="flex p-6 bg-primary-900/20 justify-between items-center">
-        <profile-menu />
-        <u-button :to="localePath('/auth/login')">{{ $t("Login") }} </u-button>
+        <u-button
+            v-if="status === 'unauthenticated'"
+            :to="localePath('/auth/login')"
+        >{{ $t("Login") }}</u-button
+        >
+        <profile-menu v-else />
 
         <div class="flex">
           <color-theme />
@@ -108,10 +112,12 @@ const navLinks = [
       <div class="hidden lg:flex items-center gap-6">
         <div class="flex items-center">
           <color-theme />
-          <profile-menu v-if="data" :name="data.user.name" />
-          <u-button v-else :to="localePath('/auth/login')">{{
-            $t("Login")
-          }}</u-button>
+          <u-button
+            v-if="status === 'unauthenticated'"
+            :to="localePath('/auth/login')"
+            >{{ $t("Login") }}</u-button
+          >
+          <profile-menu v-else />
         </div>
       </div>
     </u-container>

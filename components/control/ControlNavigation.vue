@@ -1,10 +1,11 @@
 <script setup>
 const localePath = useLocalePath();
+const { signOut } = useAuth();
 
 const navigation = ref([
   {
     name: "Dashboard",
-    href: "/control/index",
+    href: "/control",
     icon: "ic:sharp-monitor",
   },
   {
@@ -24,19 +25,22 @@ const navigation = ref([
   },
   {
     name: "Logout",
-    href: "/users/login",
+    click: () => {
+      signOut();
+    },
     icon: "ic:round-lock-open",
   },
 ]);
 </script>
 
 <template>
-  <div class="w-72 sticky top-20 p-2 border">
+  <div class="">
     <nuxt-link
       v-for="item in navigation"
       :key="item.name"
-      :to="localePath(item.href)"
-      class="flex gap-2 p-3 items-center transition text-primary-500 hover:text-white hover:bg-primary-500"
+      :to="item.href && localePath(item.href)"
+      @click="item.click && item.click()"
+      class="flex cursor-pointer gap-2 p-2 items-center transition text-primary-500 hover:text-white hover:bg-primary-500"
     >
       <icon :name="item.icon" class="w-5 h-5" />
       <span>{{ $t(item.name) }}</span>

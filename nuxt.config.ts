@@ -2,14 +2,24 @@
 import pkg from "./package.json";
 
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  alias: {
+    cookie: "cookie",
+  },
 
   typescript: {
     strict: false,
   },
+
   runtimeConfig: {
     public: {
       version: pkg.version,
+      authJs: {
+        baseUrl: process.env.NUXT_NEXTAUTH_URL, // The URL of your deployed app (used for origin Check in production)
+        verifyClientOnEveryRequest: true, // whether to hit the /auth/session endpoint on every client request
+      },
+    },
+    authJs: {
+      secret: process.env.NUXT_NEXTAUTH_SECRET, // You can generate one with `openssl rand -base64 32`
     },
     mailerUser: "",
     mailerPass: "",
@@ -41,14 +51,13 @@ export default defineNuxtConfig({
     "nuxt-file-storage",
     "nuxt-swiper",
     "nuxt-mailer",
-    "@sidebase/nuxt-auth",
+    "@hebilicious/authjs-nuxt",
   ],
-  auth: {
-    isEnabled: true,
-  },
+
   fileStorage: {
     mount: "public/uploads",
   },
+
   i18n: {
     defaultLocale: "en",
     lazy: true,
@@ -86,7 +95,10 @@ export default defineNuxtConfig({
     download: false,
     useStylesheet: true,
   },
+
   build: {
     transpile: ["gsap"],
   },
+
+  compatibilityDate: "2024-07-23",
 });

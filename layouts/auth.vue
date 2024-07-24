@@ -6,7 +6,7 @@ const head = useLocaleHead({ addSeoAttributes: true });
   <Html
     :dir="localeProperties.dir"
     :lang="head.htmlAttrs.lang"
-    class="h-full font-noto"
+    class="h-full font-cairo"
   >
     <Body>
       <div class="content">

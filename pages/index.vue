@@ -1,6 +1,7 @@
 <script setup>
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const mainBanner = ref();
@@ -31,10 +32,17 @@ onUnmounted(() => {
   ctx.revert();
 });
 
-const searchParams = ref({});
+const data = useSettings()
+
+
 </script>
 
 <template>
+
+  <debug>
+    {{data}}
+  </debug>
+
   <base-scroll>
     <loader />
 
@@ -57,7 +65,7 @@ const searchParams = ref({});
       </section>
       <section class="panel w-full">
         <u-container>
-          <base-media-management v-model="files" />
+          <base-media-management single v-model="files" />
         </u-container>
       </section>
     </main>
