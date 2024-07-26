@@ -14,12 +14,12 @@ export default defineNuxtConfig({
     public: {
       version: pkg.version,
       authJs: {
-        baseUrl: "", // The URL of your deployed app (used for origin Check in production)
+        baseUrl: process.env.NUXT_NEXTAUTH_URL, // The URL of your deployed app (used for origin Check in production)
         verifyClientOnEveryRequest: true, // whether to hit the /auth/session endpoint on every client request
       },
     },
     authJs: {
-      secret: "", // You can generate one with `openssl rand -base64 32`
+      secret: process.env.NUXT_NEXTAUTH_SECRET, // You can generate one with `openssl rand -base64 32`
     },
     mailerUser: "",
     mailerPass: "",
