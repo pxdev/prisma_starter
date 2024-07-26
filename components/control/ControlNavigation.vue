@@ -4,27 +4,27 @@ const { signOut } = useAuth();
 
 const navigation = ref([
   {
-    name: "Dashboard",
+    name: "authNav.dashboard",
     href: "/control",
     icon: "ic:sharp-monitor",
   },
   {
-    name: "My Properties",
+    name: "authNav.myProperties",
     href: "/control/properties",
     icon: "ic:outline-other-houses",
   },
   {
-    name: "Favourite",
+    name: "authNav.favourite",
     href: "/users/favourite",
     icon: "ic:baseline-favorite-border",
   },
   {
-    name: "My Account",
+    name: "authNav.myAccount",
     href: "/users/profile/edit",
     icon: "ic:outline-manage-accounts",
   },
   {
-    name: "Logout",
+    name: "auth.logout",
     click: () => {
       signOut();
     },

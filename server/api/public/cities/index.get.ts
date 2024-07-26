@@ -1,15 +1,13 @@
 import { prisma } from "~~/db";
 import { defineEventHandler, createError, sendError } from "h3";
 
-const moduleName = "Settings";
+const moduleName = "Cities";
 
 export default defineEventHandler(async (event) => {
   try {
     assertMethod(event, "GET");
 
-    const module = await prisma.setting.findMany({
-      take: 1,
-    });
+    const module = await prisma.city.findMany();
 
     return {
       statusCode: 200,

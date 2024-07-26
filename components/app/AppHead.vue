@@ -1,6 +1,6 @@
 <script setup>
 const localePath = useLocalePath();
-const { status } = useAuth();
+const { status, user, cookies, session } = useAuth();
 
 const pageY = ref(0);
 const mobileMenuOpen = ref(false);
@@ -71,9 +71,9 @@ const navLinks = [
       </div>
       <div class="flex p-6 bg-primary-900/20 justify-between items-center">
         <u-button
-            v-if="status === 'unauthenticated'"
-            :to="localePath('/auth/login')"
-        >{{ $t("Login") }}</u-button
+          v-if="status === 'unauthenticated'"
+          :to="localePath('/auth/login')"
+          >{{ $t("auth.login") }}</u-button
         >
         <profile-menu v-else />
 
@@ -115,7 +115,7 @@ const navLinks = [
           <u-button
             v-if="status === 'unauthenticated'"
             :to="localePath('/auth/login')"
-            >{{ $t("Login") }}</u-button
+            >{{ $t("auth.login") }}</u-button
           >
           <profile-menu v-else />
         </div>

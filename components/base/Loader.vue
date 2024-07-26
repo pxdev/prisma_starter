@@ -15,7 +15,7 @@ onMounted(() => {
     const tl = gsap.timeline();
 
     tl.to(loaderWrapContent, {
-      delay: 1.5,
+      delay: 1,
       y: -100,
       opacity: 0,
     });
@@ -51,10 +51,10 @@ onUnmounted(() => {
 <template>
   <div ref="loader">
     <div
-      class="loader-wrap fixed flex items-center justify-center h-screen w-screen z-50 top-0 left-0"
+      class="loader-wrap fixed flex items-center justify-center h-[110svh]  w-screen z-50 top-0 left-0"
     >
       <svg
-        class="absolute inset-0 h-screen w-screen fill-primary-900"
+        class="absolute inset-0 h-[102svh] w-screen fill-primary-900"
         preserveAspectRatio="none"
         viewBox="0 0 1000 1000"
       >

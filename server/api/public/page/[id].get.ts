@@ -5,6 +5,9 @@ const moduleName = "Pages";
 
 export default defineEventHandler(async (event) => {
   try {
+
+    assertMethod(event, "GET");
+
     // Get the data ID from the query parameters
     const { id } = event.context.params as { id: string };
 
@@ -42,12 +45,13 @@ export default defineEventHandler(async (event) => {
     };
   } catch (error) {
     // Handle any errors
-    console.error(error);
     const err = createError({
       statusCode: 500,
       statusMessage: `Error fetching ${moduleName} data`,
       data: error,
     });
     sendError(event, err);
+  } finally {
+    prisma.$disconnect();
   }
 });

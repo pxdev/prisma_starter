@@ -2,7 +2,6 @@ import { prisma } from "~~/db";
 import {
   defineEventHandler,
   getQuery,
-  H3Error,
   createError,
   sendError,
 } from "h3";
@@ -45,12 +44,13 @@ export default defineEventHandler(async (event) => {
       },
     };
   } catch (error) {
-    console.error(error);
     const err = createError({
       statusCode: 500,
       statusMessage: `Error fetching ${moduleName} data`,
       data: error,
     });
     sendError(event, err);
+  } finally {
+    prisma.$disconnect();
   }
 });

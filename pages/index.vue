@@ -32,17 +32,10 @@ onUnmounted(() => {
   ctx.revert();
 });
 
-const data = useSettings()
-
-
+const data = useSettings();
 </script>
 
 <template>
-
-  <debug>
-    {{data}}
-  </debug>
-
   <base-scroll>
     <loader />
 

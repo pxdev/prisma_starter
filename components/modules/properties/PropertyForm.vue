@@ -80,7 +80,7 @@ const handleSubmit = async () => {
       @error="onError"
       @submit="handleSubmit"
     >
-      <u-card  class="mb-6">
+      <u-card class="mb-6">
         <template #header>
           <heading is="h4">{{ $t("headers.propertyInformation") }}</heading>
         </template>

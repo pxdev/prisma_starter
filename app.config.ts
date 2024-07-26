@@ -15,8 +15,7 @@ export default defineAppConfig({
         background: "bg-gray-900/70",
       },
     },
-    button: {
-     },
+    button: {},
     formGroup: {
       base: "font-noto",
       error: "text-xs text-red-500 dark:text-red-400",
@@ -27,7 +26,7 @@ export default defineAppConfig({
     card: {
       shadow: "",
       base: "",
-     },
+    },
     input: {
       color: {
         white: {
@@ -36,7 +35,7 @@ export default defineAppConfig({
       },
     },
     select: {
-       color: {
+      color: {
         white: {
           outline: "shadow-none ring-gray-300/80 dark:ring-gray-700/60",
         },

@@ -1,14 +1,22 @@
 import { prisma } from "~~/db";
 import { defineEventHandler, createError, sendError } from "h3";
 
-const moduleName = "Settings";
+const moduleName = "Districts";
 
 export default defineEventHandler(async (event) => {
   try {
+    const { id } = event.context.params as { id: string };
+
     assertMethod(event, "GET");
 
-    const module = await prisma.setting.findMany({
-      take: 1,
+    const module = await prisma.district.findMany({
+      select:{
+        id: true,
+        name: true,
+      },
+      where: {
+        city_id: id,
+      },
     });
 
     return {

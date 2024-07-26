@@ -11,12 +11,9 @@ const breadCrumbs = ref([
     label: "Dashboard",
   },
 ]);
-
-
 </script>
 
 <template>
-
   <pages-header :bread-crumbs="breadCrumbs" title="Dashboard" />
   <main class="py-12">
     <u-container>
