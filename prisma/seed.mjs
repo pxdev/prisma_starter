@@ -3,22 +3,22 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function seed() {
-  // const cities = [
-  //     { name: 'Riyadh', districts: ['Olaya', 'Al Malaz', 'Shemaysi'] },
-  //     { name: 'Jeddah', districts: ['Al Balad', 'Al Salamah', 'Al Aziziyah'] },
-  //     { name: 'Dammam', districts: ['Al Khobar', 'Al Olayya', 'Al Faisaliyah'] },
-  // ];
-  // for (const city of cities) {
-  //     const createdCity = await prisma.city.create({
-  //         data: {
-  //             name: city.name,
-  //             districts: {
-  //                 create: city.districts.map((districtName) => ({ name: districtName })),
-  //             },
-  //         },
-  //     });
-  //  }
-  //
+  const cities = [
+      { name: 'Riyadh', districts: ['Olaya', 'Al Malaz', 'Shemaysi'] },
+      { name: 'Jeddah', districts: ['Al Balad', 'Al Salamah', 'Al Aziziyah'] },
+      { name: 'Dammam', districts: ['Al Khobar', 'Al Olayya', 'Al Faisaliyah'] },
+  ];
+  for (const city of cities) {
+      const createdCity = await prisma.city.create({
+          data: {
+              name: city.name,
+              districts: {
+                  create: city.districts.map((districtName) => ({ name: districtName })),
+              },
+          },
+      });
+   }
+
   // await prisma.user.create({
   //     data: {
   //         name: "Ahmed",
@@ -62,58 +62,58 @@ async function seed() {
   //       allow_agent_registration: true,
   //     }
   // });
-  // await prisma.ItemCategory.createMany({
-  //     data: [
-  //         {
-  //             name: "Apartment",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name:  "House",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Villa",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Office",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Shop",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Land",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Warehouse",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Building",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Hotel",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Farm",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Factory",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         },
-  //         {
-  //             name: "Other",
-  //             icon: "material-symbols:home-and-garden-outline-rounded",
-  //         }
-  //     ]
-  // });
+  await prisma.ItemCategory.createMany({
+      data: [
+          {
+              name: "Apartment",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name:  "House",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Villa",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Office",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Shop",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Land",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Warehouse",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Building",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Hotel",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Farm",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Factory",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          },
+          {
+              name: "Other",
+              icon: "material-symbols:home-and-garden-outline-rounded",
+          }
+      ]
+  });
 }
 
 try {

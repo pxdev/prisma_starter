@@ -39,7 +39,6 @@ const login = async (email, password) => {
   const response = await signIn("credentials", {
     email,
     password,
-    callbackUrl: "/",
     redirect: false,
   });
 
