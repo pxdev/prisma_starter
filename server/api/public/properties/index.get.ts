@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
     // Get the query parameters for pagination
     const query = getQuery(event);
-    const page = parseInt(query.page as string) || 1;
+    const page = parseInt(query.page as string) || 2;
     const limit = parseInt(query.limit as string) || 10;
     const skip = (page - 1) * limit;
     const search = query.search as string;
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
       skip: page ? skip : undefined,
       take: page ? limit : undefined,
       orderBy: {
-        created_at: "asc",
+        title: "asc",
       },
       where: {
         status: "ACTIVE",
@@ -74,11 +74,11 @@ export default defineEventHandler(async (event) => {
       statusCode: 200,
       statusMessage: `Successfully fetched ${moduleName} data`,
       data: {
-        module,
         totalPages,
         total,
         currentPage: page,
         limit,
+        module
       },
     };
   } catch (error) {

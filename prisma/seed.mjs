@@ -20,7 +20,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -36,7 +36,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -52,7 +52,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -68,7 +68,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -84,7 +84,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -100,7 +100,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -116,7 +116,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -132,7 +132,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -148,7 +148,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -164,7 +164,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -180,7 +180,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -196,7 +196,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -212,7 +212,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -228,7 +228,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -244,7 +244,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -260,7 +260,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -276,7 +276,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -292,7 +292,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -308,7 +308,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -324,7 +324,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },        {
             title: "Apartment in Riyadh",
             description: "This is a beautiful apartment in Riyadh.",
@@ -339,7 +339,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -355,7 +355,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -371,7 +371,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -387,7 +387,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -403,7 +403,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -419,7 +419,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -435,7 +435,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -451,7 +451,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -467,7 +467,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -483,7 +483,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -499,7 +499,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -515,7 +515,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -531,7 +531,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -547,7 +547,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -563,7 +563,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -579,7 +579,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -595,7 +595,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -611,7 +611,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -627,7 +627,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -643,7 +643,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -659,7 +659,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -675,7 +675,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -691,7 +691,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         },
         {
             title: "Apartment in Riyadh",
@@ -707,7 +707,7 @@ async function seed() {
             year_built: 2020,
             for_sale: true,
             is_featured: true,
-            owner_id: "clywo7o6s0000f2ejm436v35g",
+            owner_id: "clz2z00ae0000ueh8mjvl5ab3",
         }
     ]
    })

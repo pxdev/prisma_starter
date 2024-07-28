@@ -21,7 +21,7 @@ const breadCrumbs = ref([
 
 // Filters
 const search = ref("");
-const page = ref(1);
+const page = ref(2);
 const pageCount = ref(9);
 
 // Fetch Data
@@ -55,15 +55,11 @@ useHead({
 <template>
   <base-scroll>
     <loader/>
-    <pre>
-      {{module}}
-    </pre>
-    <pages-header :bread-crumbs="breadCrumbs" title="Properties"/>
+     <pages-header :bread-crumbs="breadCrumbs" title="Properties"/>
     <main v-if="module" class="bg-gray-100 py-20">
       <u-container>
-        <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
           <property-card
               v-for="property in module.data?.module"
@@ -74,8 +70,7 @@ useHead({
 
 
         <div class="mt-4 flex flex-wrap items-center justify-center rounded-lg p-4">
-
-          <u-pagination v-model="page" :page-count="pageCount" :total="module.data?.totalPages" :ui="{
+          <u-pagination v-model="page" :page-count="pageCount" :total="module.data?.total" :ui="{
     wrapper: 'flex items-center gap-1',
     rounded: '!rounded-full min-w-[32px] justify-center',
     default: {
@@ -84,8 +79,8 @@ useHead({
       }
     }
   }"/>
-
         </div>
+
 
 
       </u-container>
