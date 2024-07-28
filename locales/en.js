@@ -17,6 +17,7 @@ export default {
     noFilesSelectedMessage: "Click here to browse your system files..",
   },
   headers: {
+    home: "Home",
     dashboard: "Dashboard",
     properties: "Properties",
     users: "Users",
@@ -42,11 +43,13 @@ export default {
   toastMessages: {
     success: "Success",
     error: "Error",
+    successLogin: "Successfully logged in",
     successfullyUploaded: "Files uploaded successfully",
     successfullyDeleted: "Successfully deleted",
     successfullyLoggedOut: "You have successfully logged out",
     errorDelete: "Failed to delete",
     failedUpload: "Failed to upload files",
+    failedLogin: "Credentials not working",
   },
   forms: {
     sale: "Sale",

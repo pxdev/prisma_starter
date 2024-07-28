@@ -2,7 +2,8 @@
 import pkg from "./package.json";
 
 export default defineNuxtConfig({
-  alias: {
+
+   alias: {
     cookie: "cookie",
   },
 

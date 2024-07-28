@@ -26,7 +26,7 @@ const breadCrumbs = ref([
   <page-not-found v-if="error" />
 
   <main v-else>
-    <pages-header :bread-crumbs="breadCrumbs" :title="module.data.title" />
+<!--    <pages-header :bread-crumbs="breadCrumbs" :title="module.data.title" />-->
 
     <div class="bg-red-200">
       <section

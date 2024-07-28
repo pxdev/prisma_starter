@@ -45,13 +45,7 @@ export default defineEventHandler(async (event) => {
         title: {
           contains: search,
         },
-        item_category: {
-          some: {
-            name: {
-              contains: type,
-            },
-          },
-        },
+ 
       },
       include: {
         owner: {
@@ -63,8 +57,7 @@ export default defineEventHandler(async (event) => {
             phone: true,
           },
         },
-        item_category: true,
-        media: {
+         media: {
           select: {
             id: true,
             path: true,

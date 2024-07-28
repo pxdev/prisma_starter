@@ -7,10 +7,10 @@ const localePath = useLocalePath();
 </script>
 
 <template>
-  <debug>{{ props.property }}</debug>
+<!--  <pre>{{ props.property }}</pre>-->
 
   <div class="bg-white p-4 group">
-    <div class="property-thumb relative overflow-hidden h-48 bg-gray-50">
+    <div class="property-thumb relative overflow-hidden h-60 bg-gray-50">
       <div class="absolute z-10 flex gap-2 text-xs left-3 top-3">
         <div class="text-xs px-2 py-1 bg-white">
           {{ props.property.for_sale ? $t("For Sale") : $t("For Rent") }}
@@ -22,11 +22,18 @@ const localePath = useLocalePath();
           {{ $t("Featured") }}
         </div>
       </div>
-      <img
+
+
+      <img v-if="props.property.media.length > 0"
         class="w-full h-full object-cover transition-all duration-500 delay-100 ease-in-out group-hover:rotate-2 group-hover:scale-110"
-        :src="`/uploads${props.property?.images[0]?.path}`"
+        :src="`/uploads${props.property?.media[0]?.path}`"
         alt="property image"
       />
+
+      <div v-else class="bg-gray-100 flex items-center justify-center  object-cover h-full w-full">
+          <icon name="material-symbols:android-camera-outline" class="w-12 h-12 text-gray-300"></icon>
+      </div>
+
     </div>
 
     <div class="py-6">
@@ -52,7 +59,7 @@ const localePath = useLocalePath();
         </div>
         <div class="flex gap-2">
           <icon class="h-5 w-5" name="iconoir:ruler-arrows" />
-          <p class="text-gray-500">{{ props.property.size }}</p>
+          <p class="text-gray-500">{{ props.property.area }}</p>
         </div>
       </div>
     </div>

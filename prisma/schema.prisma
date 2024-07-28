@@ -36,46 +36,47 @@ model User {
 }
 
 model Item {
-  id             String         @id @default(cuid())
+  id             String        @id @default(cuid())
   title          String
   description    String
-  price          Float
-  address        String
-  city           String
-  district       String
-  bedroom_count  Int
-  bathroom_count Int
-  garage_count   Int            @default(0)
-  area           Float
-  year_built     Int
-  status         ItemStatus     @default(ACTIVE)
-  item_category  ItemCategory[]
-  for_sale       Boolean        @default(true)
-  is_featured    Boolean        @default(false)
-  latitude       Float
-  longitude      Float
-  created_at     DateTime       @default(now())
-  updated_at     DateTime       @updatedAt
+  price          Float?
+  address        String?
+  city           String?
+  district       String?
+  bedroom_count  Int?
+  bathroom_count Int?
+  garage_count   Int?          @default(0)
+  area           Float?
+  year_built     Int?
+  status         ItemStatus    @default(ACTIVE)
+  for_sale       Boolean       @default(true)
+  is_featured    Boolean       @default(false)
+  latitude       Float?
+  longitude      Float?
+  created_at     DateTime      @default(now())
+  updated_at     DateTime      @updatedAt
   owner_id       String
-  owner          User           @relation("ItemOwner", fields: [owner_id], references: [id])
+  owner          User          @relation("ItemOwner", fields: [owner_id], references: [id])
   media          Media[]
   bookmarks      Bookmark[]
   custom_data    Json? // Stores dynamic custom fields
-}
-
-enum ItemStatus {
-  ACTIVE
-  INACTIVE
-  SOLD
+  category_id    String? // Foreign key to reference ItemCategory
+  category       ItemCategory? @relation(fields: [category_id], references: [id])
 }
 
 model ItemCategory {
   id         String   @id @default(cuid())
   name       String   @unique
   icon       String?
-  items      Item[]
   media      Media[]
   created_at DateTime @default(now())
+  items      Item[] // Relation to Item
+}
+
+enum ItemStatus {
+  ACTIVE
+  INACTIVE
+  SOLD
 }
 
 model Media {
