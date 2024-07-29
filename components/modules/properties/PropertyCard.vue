@@ -1,4 +1,6 @@
 <script setup>
+import Features from "~/components/modules/properties/Features.vue";
+
 const props = defineProps({
   property: Object,
 });
@@ -41,32 +43,22 @@ const localePath = useLocalePath();
         <p class="text-sm text-gray-400">
           {{ props.property.city }}-{{ props.property.district }}
         </p>
-        <h2 class="text-lg font-semibold">{{ props.property.title }}</h2>
+        <h2 class="text-lg font-semibold"><nuxt-link :to="localePath(`/properties/view/${props.property.id}`)">{{ props.property.title }}</nuxt-link></h2>
       </div>
 
-      <div class="flex items-center text-sm justify-between">
-        <div class="flex gap-2">
-          <icon class="h-5 w-5" name="hugeicons:bed-single-01" />
-          <p class="text-gray-500">
-            {{ props.property.bedroom_count }} {{ $t("Beds") }}
-          </p>
-        </div>
-        <div class="flex gap-2">
-          <icon class="h-5 w-5" name="hugeicons:bathtub-01" />
-          <p class="text-gray-500">
-            {{ props.property.bathroom_count }} {{ $t("Baths") }}
-          </p>
-        </div>
-        <div class="flex gap-2">
-          <icon class="h-5 w-5" name="iconoir:ruler-arrows" />
-          <p class="text-gray-500">{{ props.property.area }}</p>
-        </div>
-      </div>
+
+      <features
+          :beds="props.property.bedroom_count"
+          :baths="props.property.bathroom_count"
+          :area="props.property.area"
+      ></features>
+
+
     </div>
 
     <div class="flex border-t border-dashed py-4 justify-between items-center">
       <p class="text-2xl">${{ useFormatPrice(props.property.price) }}</p>
-      <u-button><icon name="mdi:arrow-top-right" class="w-5 h-5" /></u-button>
+      <u-button :to="localePath(`/properties/view/${props.property.id}`)"><icon name="mdi:arrow-top-right" class="w-5 h-5" /></u-button>
     </div>
   </div>
 </template>

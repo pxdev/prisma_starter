@@ -1,12 +1,14 @@
 import { prisma } from "~~/db";
-import { defineEventHandler, createError, sendError } from "h3";
+import {defineEventHandler, createError, sendError, getQuery} from "h3";
 
 const moduleName = "Property";
 
 export default defineEventHandler(async (event) => {
+  const query = getQuery(event);
+
   try {
     // Get the data ID from the query parameters
-    const { id } = event.context.params as { id: string };
+    const id = query.id as string;
 
     if (!id) {
       const err = createError({
@@ -28,10 +30,11 @@ export default defineEventHandler(async (event) => {
             surname: true,
             email: true,
             phone: true,
+            avatar: true
           },
         },
-        item_category: true,
-        media: true,
+        category: true,
+         media: true,
       },
     });
 

@@ -90,4 +90,21 @@ export default {
     favourite: "Favourite",
     myProperties: "My Properties"
   },
+  property:{
+    beds: "Beds",
+    baths: "Baths",
+    garages: "Garages",
+    yearBuilt: "Year Built",
+    sqft: "Sqft",
+    area: "Area",
+    featured: "Featured",
+    forSale: "For Sale",
+    forRent: "For Rent",
+    details: "Details",
+    location: "Location",
+    contact: "Contact",
+    similarProperties: "Similar Properties",
+    propertyDetails: "Property Details",
+    propertyFeatures: "Property Features",
+  }
 };
