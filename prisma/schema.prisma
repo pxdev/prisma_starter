@@ -105,6 +105,7 @@ model Menu {
   title      String
   active     Boolean  @default(true)
   slug       String
+  order      Int      @default(0)
   parent_id  String?
   parent     Menu?    @relation("ChildMenu", fields: [parent_id], references: [id])
   children   Menu[]   @relation("ChildMenu")

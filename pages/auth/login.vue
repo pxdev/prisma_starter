@@ -73,8 +73,11 @@ const login = async (email, password) => {
     <div class="bg-gray-100 relative dark:bg-gray-900 hidden h-screen w-full md:w-1/2 lg:block xl:w-2/3">
       <div class="mx-auto w-full h-full flex items-center justify-center overflow-hidden relative">
         <div class="absolute grid grid-cols-6 -translate-x-4 -translate-y-4 object-cover w-[180%] h-[180%] z-10" >
-          <div class="border-4 border-black" v-for="n in 30">
-              <div class="h-full w-full bg-lime-300" v-if="n === 10">xxx</div>
+          <div class="border-4 border-black p-2 " v-for="n in 30">
+              <div class="h-full w-full bg-lime-300 rounded" v-if="n === 15">
+
+              </div>
+ 
           </div>
         </div>
         <video autoplay class="absolute object-cover w-full h-screen" loop src="/video/login_vid.mp4" />

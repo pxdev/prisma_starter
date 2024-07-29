@@ -44,6 +44,7 @@
     "lenis": "^1.1.6",
     "nuxt-mailer": "^0.11.0",
     "nuxt-swiper": "latest",
+    "sortablejs": "^1.15.2",
     "split-type": "^0.3.4",
     "v-calendar": "^3.0.3",
     "zod": "^3.23.8"
