@@ -69,12 +69,20 @@ const login = async (email, password) => {
 
 <template>
   <div class="flex h-screen w-full flex-col items-center md:flex-row">
-    <div
-        class="flex h-screen w-full items-center justify-center md:mx-auto md:w-1/2 md:max-w-md lg:max-w-full lg:px-16 xl:w-1/3 xl:px-12"
-    >
-      <div
-          class="mx-auto flex h-full w-full max-w-xs flex-col items-center justify-between py-8"
-      >
+
+    <div class="bg-gray-100 relative dark:bg-gray-900 hidden h-screen w-full md:w-1/2 lg:block xl:w-2/3">
+      <div class="mx-auto w-full h-full flex items-center justify-center overflow-hidden relative">
+        <div class="absolute grid grid-cols-6 -translate-x-4 -translate-y-4 object-cover w-[180%] h-[180%] z-10" >
+          <div class="border-4 border-black" v-for="n in 30">
+              <div class="h-full w-full bg-lime-300" v-if="n === 10">xxx</div>
+          </div>
+        </div>
+        <video autoplay class="absolute object-cover w-full h-screen" loop src="/video/login_vid.mp4" />
+      </div>
+    </div>
+
+    <div class="flex h-screen w-full items-center justify-center md:mx-auto md:w-1/2 md:max-w-md lg:max-w-full lg:px-16 xl:w-1/3 xl:px-12">
+      <div class="mx-auto flex h-full w-full max-w-xs flex-col items-center justify-between py-8">
         <div class="mx-auto flex w-full max-w-xs items-center justify-between">
           <nuxt-link
               :to="localePath('/')"
@@ -87,7 +95,6 @@ const login = async (email, password) => {
             <color-theme/>
           </div>
         </div>
-
         <div class="w-full login">
           <heading is="h2">
             {{ $t("auth.welcomeBack") }}
@@ -143,8 +150,6 @@ const login = async (email, password) => {
           </u-form>
         </div>
         <!-- login form -->
-
-
         <app-copyrights/>
       </div>
     </div>
