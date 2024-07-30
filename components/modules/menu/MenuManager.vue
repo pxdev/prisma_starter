@@ -1,12 +1,12 @@
 <script setup>
-import { useSortable } from '@vueuse/integrations/useSortable'
+import {Container, Draggable} from "vue-dndrop";
+
 const el = ref(null)
 const menuItems = ref([])
 
 onMounted(async () => {
   await fetchMenuItems()
 })
-
 
 async function fetchMenuItems() {
   try {
@@ -19,32 +19,37 @@ async function fetchMenuItems() {
   }
 }
 
-const animation = 200
-
-const { option } = useSortable(el, menuItems, {
-  animation
-})
-
-// You can use the option method to set and get the option of Sortable
-option('animation', animation)
+const MyEvent = (event) => {
+  console.log(event)
+ }
 
 
 </script>
 <template>
 
-  <br><br><br><br><br><br><br><br><br><br>
+  <u-container class="bg-red-100">
+    <br><br><br><br><br><br><br><br><br><br>
 
-  <div ref="el">
-    <div class="border bg-gray-50 p-3 mb-2 transition-all ease-in-out" v v-for="item in menuItems" :key="item.id">
-      {{ item.title }}
-    </div>
-  </div>
 
-  <pre>
-    {{menuItems}}
-  </pre>
+    <container>
+      <draggable v-for="item in menuItems" :key="item.id">
+        <div class="draggable-item border mb-1 p-2 bg-white">
+          {{ item.title }}
+        </div>
+        <div class="mx-4">
+          <container>
+            <draggable v-for="child in item.children" :key="child.id">
+              <div class="draggable-item border mb-1 p-2 bg-white">
+                {{ child.title }}
+              </div>
+            </draggable>
+          </container>
+        </div>
+      </draggable>
+    </container>
 
-   <div class="menu-manager">
-   </div>
+    <pre>{{ menuItems }}</pre>
 
+
+  </u-container>
 </template>

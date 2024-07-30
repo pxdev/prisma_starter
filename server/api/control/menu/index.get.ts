@@ -12,7 +12,14 @@ export default defineEventHandler(async (event) => {
         assertMethod(event, "GET");
 
         // Fetch the properties with pagination
-        const module = await prisma.menu.findMany();
+        const module = await prisma.menu.findMany({
+            where: {
+                parent_id: null,
+            },
+            include: {
+                children: true,
+            },
+        });
 
         // Calculate total page
 
