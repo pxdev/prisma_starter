@@ -53,7 +53,12 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "nuxt-mailer",
     "@hebilicious/authjs-nuxt",
+    'nuxt-mapbox',
   ],
+
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoiZHJweGRldiIsImEiOiJjbHFtNHN6eTkycm12MmptZXBhNmNid3VxIn0.evaD_4vhETepxx_9IfCAVw'
+  },
 
   fileStorage: {
     mount: "public/uploads",

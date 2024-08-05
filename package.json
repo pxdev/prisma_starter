@@ -30,7 +30,9 @@
     "nuxt-file-storage": "^0.2.7",
     "nuxt-icon": "^0.6.10",
     "prettier": "3.3.3",
-    "prisma": "^5.17.0"
+    "prisma": "^5.17.0",
+    "mapbox-gl": "^3.5.2",
+    "nuxt-mapbox": "^1.6.0"
   },
   "dependencies": {
     "@iconify-json/solar": "^1.1.9",

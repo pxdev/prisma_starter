@@ -41,16 +41,24 @@ const getDistricts = async (id) => {
 };
 
 const search = () => {
+  const queryParams = {
+    city: form.value.city?.name,
+    district: form.value.district?.name,
+    category: form.value.category?.name,
+    propertyFor: form.value.propertyFor,
+  };
+
+  // Filter out undefined or empty parameters
+  const filteredQueryParams = Object.fromEntries(
+      Object.entries(queryParams).filter(([_, value]) => value)
+  );
+
   router.push({
     path: localePath("/properties"),
-    query: {
-      city: form.value.city.name,
-      district: form.value.district.name,
-      category: form.value.category.name,
-      propertyFor: form.value.propertyFor,
-    },
+    query: filteredQueryParams,
   });
 };
+
 </script>
 
 <template>

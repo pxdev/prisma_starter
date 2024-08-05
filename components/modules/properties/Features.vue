@@ -1,4 +1,6 @@
 <script setup>
+import {useSettings} from "~/composables/useSettings";
+
 const props = defineProps({
   beds: Number,
   baths: Number,
@@ -6,6 +8,8 @@ const props = defineProps({
   garage: Number,
   year: Number,
 });
+
+
 </script>
 
 <template>
@@ -18,8 +22,6 @@ const props = defineProps({
           <p class="block font-semibold">{{ props.beds }} </p>
           <p class="block text-xs text-gray-400">{{$t('property.beds')}}</p>
         </div>
-
-
       </div>
     </u-tooltip>
 

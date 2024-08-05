@@ -1,12 +1,17 @@
 <script setup>
-import PropertyGallery from "~/components/modules/properties/PropertyGallery.vue";
+import {useSettings} from "~/composables/useSettings";
 
 const {t} = useI18n();
 const route = useRoute();
+const router = useRouter()
 const toast = useToast();
+const settings = useSettings()
+const config = useRuntimeConfig()
 const localePath = useLocalePath();
-
 const id = route.params.id;
+
+const currentRoute = ref(config.public.authJs.baseUrl+router.currentRoute.value.fullPath)
+
 
 const {data: module, error} = await useAsyncData(id, () => $fetch("/api/public/properties/view",
     {
@@ -25,6 +30,15 @@ const breadCrumbs = ref([
     to: localePath("/properties"),
   },
   {
+    label: module.value?.data?.city,
+    to: localePath("/properties?city="+module.value?.data?.city),
+  },
+  {
+    label: module.value?.data?.district,
+    to: localePath("/properties?district="+module.value?.data?.district),
+  },
+
+  {
     label: module.value?.data?.title,
   },
 ])
@@ -34,13 +48,17 @@ const showPhone = ref(false)
 </script>
 
 <template>
-  <base-scroll>
+  <debug>{{ module?.data }}</debug>
+
     <loader/>
     <pages-header :bread-crumbs="breadCrumbs" :title="module?.data?.title"/>
-    <main class="bg-gray-100 py-20">
+    <main class="bg-gray-100 py-10">
       <u-container>
+        <div class="mb-2">
+          <heading is="h1" class="text-2xl mb-1">{{ module.data.title }}</heading>
+          <p class="text-gray-500">{{ module.data.address }}</p>
+        </div>
 
-            <heading is="h1" class="text-2xl mb-2">{{ module.data.title }}</heading>
 
             <div class="grid gap-4 py-6 items-start lg:grid-cols-12">
               <div class="lg:col-span-8">
@@ -66,18 +84,14 @@ const showPhone = ref(false)
                   <p class="text-sm text-gray-500">{{ module.data.description }}</p>
                 </u-card>
 
-                <u-card class="Fixtures mb-6">
+
+                <u-card class="features mb-6" v-if="module.data.longitude && module.data.latitude">
                   <template #header>
-                    <heading is="h3">{{ $t('Fixtures and Fittings') }}</heading>
+                    <heading is="h3">{{ $t('Description') }}</heading>
                   </template>
-                  <div class="flex flex-wrap gap-2">
-<!--                    <u-badge variant="outline" v-for="(fixture, index) in property.data.fixtures" :key="index">-->
-<!--                      {{ $t(fixture.fixture_fitting.name) }}-->
-<!--                    </u-badge>-->
-
-
-                  </div>
+                  <map-viewer :location_lang="module?.data?.longitude" :location_lat="module?.data?.latitude" :location_zoom="module?.data?.zoom" />
                 </u-card>
+
 
               </div>
               <div class="lg:col-span-4">
@@ -86,15 +100,20 @@ const showPhone = ref(false)
                   <u-card class="shadow">
                     <div class="price">
                       <p>{{ $t('Price') }}</p>
-                      <p><span class="text-primary-500 font-semibold text-2xl">{{ useFormatPrice(module.data.price) }}</span></p>
+                      <p>
+                        <span class="text-primary-500 font-semibold text-2xl">
+                          {{settings.currency_symbol}}
+                          {{ useFormatPrice(module.data.price) }}
+                        </span>
+                      </p>
                     </div>
 
                     <div class="flex gap-4 py-6">
-                      <div class="h-16 w-16 rounded border bg-gray-50 flex items-center justify-center">
-                        <icon name="solar:user-bold-duotone" class="w-8 h-8"/>
-                      </div>
-                      <div class="flex flex-col justify-center">
-                        <p class="text-xs opacity-60 mb-2">{{ $t('Listed by') }}</p>
+
+                      <u-avatar size="xl" class="bg-gray-200" :src="module?.data?.owner?.avatar" :alt="module.data.owner.name + ' ' + module.data.owner.surname" />
+
+                       <div class="flex flex-col justify-center">
+                        <p class="text-xs text-gray-500">{{ $t('Listed by') }}</p>
                         <p class="font-semibold">{{ module.data.owner.name + ' ' + module.data.owner.surname  }}</p>
                       </div>
                     </div>
@@ -106,13 +125,13 @@ const showPhone = ref(false)
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
-                      <u-button @click="showPhone= true" class="flex-1 flex justify-center" color="primary" size="xl">
+                      <u-button @click="showPhone= true" class="flex-1 flex justify-center" variant="soft" size="xl">
                         <icon name="basil:phone-solid" class="w-6 h-6"/>
                         {{ $t('Call') }}
                       </u-button>
                       <u-button target="_blank"
-                                :to="`https://api.whatsapp.com/send?phone=${module.data.owner.phone}&text=${url}`"
-                                class="flex-1 flex justify-center" color="green" variant="outline" size="xl">
+                                :to="`https://api.whatsapp.com/send?phone=${module.data.owner.phone}&text=${currentRoute}`"
+                                class="flex-1 flex justify-center" color="green" variant="soft"  size="xl">
                         <icon name="basil:whatsapp-outline" class="w-6 h-6"/>
                         {{ $t('Whatsapp') }}
                       </u-button>
@@ -127,7 +146,7 @@ const showPhone = ref(false)
 
       </u-container>
     </main>
-  </base-scroll>
+
 </template>
 
 <style scoped>

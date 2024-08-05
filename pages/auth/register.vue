@@ -88,6 +88,12 @@ const onError = async (event) => {
 
 <template>
   <div class="flex h-screen w-full flex-col items-center md:flex-row">
+    <div class="bg-gray-100 relative dark:bg-gray-900 hidden h-screen w-full md:w-1/2 lg:block xl:w-2/3">
+      <div class="mx-auto w-full h-full flex items-center justify-center overflow-hidden relative">
+        <img class="absolute object-cover w-full h-screen" src="/images/cozy-modern-loft-b.webp" alt="">
+      </div>
+    </div>
+
     <div
       class="flex h-screen w-full items-center justify-center md:mx-auto md:w-1/2 md:max-w-md lg:max-w-full lg:px-16 xl:w-1/3 xl:px-12"
     >

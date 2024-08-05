@@ -18,6 +18,11 @@ enum BannerStatus {
   INACTIVE
 }
 
+enum ForTypes {
+  sale
+  rent
+}
+
 model User {
   id            String     @id @default(cuid())
   email         String     @unique
@@ -49,10 +54,12 @@ model Item {
   area           Float?
   year_built     Int?
   status         ItemStatus    @default(ACTIVE)
+  property_for   ForTypes?     @default(sale)
   for_sale       Boolean       @default(true)
   is_featured    Boolean       @default(false)
   latitude       Float?
   longitude      Float?
+  zoom           Int?
   created_at     DateTime      @default(now())
   updated_at     DateTime      @updatedAt
   owner_id       String
